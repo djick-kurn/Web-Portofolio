@@ -638,3 +638,210 @@ body {
         margin-top: -0.3rem !important;
     }
 }
+/* =========================
+   ELEGANT GLASS EFFECT CONTAINER
+   ========================= */
+
+.card {
+    background: rgba(255, 255, 255, 0.16) !important;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.25) !important;
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.25),
+        0 0 25px rgba(255,255,255,0.08),
+        inset 0 1px 1px rgba(255,255,255,0.2);
+
+    border-radius: 28px !important;
+
+    overflow: hidden;
+    position: relative;
+
+    transition: all 0.4s ease;
+}
+
+/* Glow animasi hidup */
+.card::before {
+    content: "";
+
+    position: absolute;
+    inset: -2px;
+
+    background: linear-gradient(
+        130deg,
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.05),
+        rgba(255,255,255,0.25)
+    );
+
+    background-size: 300% 300%;
+
+    animation: elegantGlow 8s ease infinite;
+
+    z-index: 0;
+
+    border-radius: 30px;
+
+    opacity: 0.6;
+}
+
+/* Isi card di atas efek */
+.card > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Hover desktop */
+.card:hover {
+    transform: translateY(-4px) scale(1.01);
+
+    box-shadow:
+        0 12px 40px rgba(0,0,0,0.35),
+        0 0 35px rgba(255,255,255,0.15);
+}
+
+/* Animasi gradient glow */
+@keyframes elegantGlow {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* =========================
+   HEADER & TEXT PREMIUM
+   ========================= */
+
+.card h1 {
+    color: #ffffff !important;
+
+    text-shadow:
+        0 2px 8px rgba(0,0,0,0.4),
+        0 0 10px rgba(255,255,255,0.2);
+
+    letter-spacing: 1px;
+}
+
+.card h2 {
+    color: #ffffff !important;
+
+    text-shadow:
+        0 1px 6px rgba(0,0,0,0.35);
+}
+
+.card p {
+    color: rgba(255,255,255,0.88) !important;
+}
+
+/* =========================
+   FOTO PROFIL LEBIH HIDUP
+   ========================= */
+
+.profile-img {
+
+    border: 3px solid rgba(255,255,255,0.7) !important;
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.2),
+        0 0 40px rgba(255,255,255,0.12);
+
+    transition: all 0.4s ease;
+}
+
+.profile-img:hover {
+
+    transform: scale(1.06);
+
+    box-shadow:
+        0 0 30px rgba(255,255,255,0.35),
+        0 0 60px rgba(255,255,255,0.18);
+}
+
+/* =========================
+   SCROLL AREA MODERN
+   ========================= */
+
+.scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.35);
+    border-radius: 20px;
+}
+
+/* =========================
+   ICON SOSMED ELEGANT
+   ========================= */
+
+.social-btn {
+
+    background: rgba(255,255,255,0.12);
+
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.15);
+
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+
+    transform: translateY(-3px) scale(1.08);
+
+    background: rgba(255,255,255,0.2);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.25),
+        0 0 15px rgba(255,255,255,0.15);
+}
+
+/* =========================
+   TOMBOL DOWNLOAD PREMIUM
+   ========================= */
+
+.button-container .btn-outline-dark {
+
+    border-radius: 14px !important;
+
+    padding: 10px 22px;
+
+    background: rgba(255,255,255,0.15);
+
+    color: white !important;
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    backdrop-filter: blur(12px);
+
+    transition: all 0.3s ease;
+}
+
+.button-container .btn-outline-dark:hover {
+
+    transform: translateY(-2px);
+
+    background: rgba(255,255,255,0.25);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.2);
+}
