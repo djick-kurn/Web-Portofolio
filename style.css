@@ -496,3 +496,22 @@ body {
 }
 
     
+/* Pendekkan ukuran container/card */
+.card {
+    max-height: calc(90vh - 20px) !important;
+    height: calc(auto - 20px);
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+    .card {
+        max-height: calc(90vh - 20px) !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .card {
+        max-height: calc(88vh - 20px) !important;
+    }
+}
