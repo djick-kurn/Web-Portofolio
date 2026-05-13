@@ -478,3 +478,7 @@ body {
         max-height: 35vh !important;
     }
 }
+/* Naikkan posisi container utama */
+.container {
+    transform: translateY(-5px);
+}
