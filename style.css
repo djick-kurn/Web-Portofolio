@@ -482,3 +482,33 @@ body {
 .container {
     transform: translateY(-5px);
 }
+/* FIX date & time agar tidak tertutup foto profil saat zoom */
+#datetime-container {
+    position: relative;
+    z-index: 20;
+
+    /* naikkan posisi */
+    margin-bottom: 12px;
+
+    /* tetap center */
+    justify-content: center;
+    align-items: center;
+}
+
+/* beri jarak aman pada foto profil */
+.profile-container {
+    margin-top: 8px;
+}
+
+/* khusus zoom/mobile kecil */
+@media screen and (max-width: 768px) {
+
+    #datetime-container {
+        margin-bottom: 14px !important;
+        font-size: 10px;
+    }
+
+    .profile-container {
+        margin-top: 10px !important;
+    }
+}
