@@ -494,3 +494,157 @@ body {
 .profile-container {
     margin-top: 20px !important;
 }
+/* ===============================
+   ELEGANT PREMIUM CONTAINER DESIGN
+   =============================== */
+
+/* Container lebih hidup */
+.container {
+    position: relative;
+    padding: 30px;
+    animation: floatingContainer 5s ease-in-out infinite;
+}
+
+/* Efek glow belakang card */
+.container::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.18),
+        transparent 70%
+    );
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(50px);
+    z-index: 0;
+}
+
+/* Card premium glassmorphism */
+.card {
+    position: relative;
+    z-index: 1;
+
+    background: rgba(255,255,255,0.18) !important;
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.25),
+        0 0 20px rgba(255,255,255,0.08);
+
+    overflow: hidden;
+
+    transition: all 0.4s ease;
+}
+
+/* Efek shine elegan */
+.card::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -40%;
+    width: 180%;
+    height: 200%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent
+    );
+
+    transform: rotate(25deg);
+
+    animation: shineEffect 7s linear infinite;
+}
+
+/* Hover card */
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.35),
+        0 0 25px rgba(255,255,255,0.15);
+}
+
+/* Foto profil lebih mewah */
+.profile-img {
+    border: 4px solid rgba(255,255,255,0.9);
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.35),
+        0 10px 20px rgba(0,0,0,0.25);
+}
+
+/* Tombol sosial lebih modern */
+.social-btn {
+    background: rgba(255,255,255,0.15);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.15);
+
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.social-btn:hover {
+    transform: translateY(-4px) scale(1.08);
+
+    box-shadow:
+        0 8px 18px rgba(0,0,0,0.25);
+}
+
+/* Tombol download lebih premium */
+.button-container .btn-outline-dark {
+    border-radius: 30px;
+
+    padding: 10px 25px;
+
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    transition: all 0.3s ease;
+
+    backdrop-filter: blur(8px);
+}
+
+.button-container .btn-outline-dark:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* Animasi floating */
+@keyframes floatingContainer {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Animasi shine */
+@keyframes shineEffect {
+    0% {
+        left: -120%;
+    }
+
+    100% {
+        left: 120%;
+    }
+}
