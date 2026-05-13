@@ -482,33 +482,15 @@ body {
 .container {
     transform: translateY(-5px);
 }
-/* FIX date & time agar tidak tertutup foto profil saat zoom */
+/* FIX jarak datetime dengan foto profil */
 #datetime-container {
     position: relative;
-    z-index: 20;
+    z-index: 99;
 
-    /* naikkan posisi */
-    margin-bottom: 12px;
-
-    /* tetap center */
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 35px !important;
 }
 
-/* beri jarak aman pada foto profil */
+/* Turunkan area foto profil */
 .profile-container {
-    margin-top: 8px;
-}
-
-/* khusus zoom/mobile kecil */
-@media screen and (max-width: 768px) {
-
-    #datetime-container {
-        margin-bottom: 24px !important;
-        font-size: 10px;
-    }
-
-    .profile-container {
-        margin-top: 12px !important;
-    }
+    margin-top: 20px !important;
 }
