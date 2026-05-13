@@ -344,7 +344,7 @@ body {
     }
 }
 /* =================================
-   MODE LANDSCAPE OTOMATIS
+   FIX LANDSCAPE AGAR H2 & BUTTON NORMAL
    ================================= */
 
 @media screen and (orientation: landscape) and (max-height: 500px) {
@@ -358,66 +358,78 @@ body {
         min-height: 100vh;
         height: auto;
         padding: 10px;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
     }
 
     .card {
         width: 95%;
         max-width: 900px;
         height: auto;
-        max-height: 95vh;
-        display: flex;
-        flex-direction: row;
-        overflow: hidden;
+        max-height: none;
         margin: 0 auto !important;
-        padding: 1rem;
-        gap: 20px;
-    }
-
-    /* Bagian kiri */
-    .profile-container,
-    .button-container {
-        width: 35%;
+        padding: 1.2rem;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column; /* tetap vertikal */
     }
 
-    /* Bagian kanan */
-    .scrollable-content {
-        width: 65%;
-        max-height: 80vh;
-        overflow-y: auto;
-        padding-right: 10px;
-    }
-
+    /* Foto lebih kecil */
     .profile-img {
-        width: 7rem;
-        height: 7rem;
+        width: 6rem;
+        height: 6rem;
     }
 
+    /* Judul */
     .card h1 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
+        margin-bottom: 0.3rem;
     }
 
+    /* Deskripsi */
     .card p {
         font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* H2 tetap terlihat */
+    .card h2 {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Scroll area */
+    .scrollable-content {
+        max-height: 35vh;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+
+    /* Tombol sosial tetap bawah */
+    .button-container {
+        margin-top: 1rem;
+        margin-bottom: 0;
     }
 
     .button-group {
-        gap: 10px;
+        gap: 12px;
     }
 
     .social-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
     }
 
+    /* Download CV */
+    .button-container a.btn-outline-dark {
+        margin-top: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Copyright tetap bawah */
     .copyright {
-        margin-top: 5px;
+        margin-top: 8px;
         font-size: 12px;
+        text-align: center;
     }
 }
