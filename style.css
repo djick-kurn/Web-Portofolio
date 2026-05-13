@@ -229,6 +229,16 @@ body {
     width: 100%;
 }
 
+/* FIX posisi logo sosial tetap di atas tombol download */
+.button-group {
+    margin-bottom: 2.5rem !important;
+    flex-wrap: nowrap !important;
+}
+
+.button-container a.btn-outline-dark {
+    margin-top: 0 !important;
+}
+
 .instruction {
     transition: opacity 0.5s ease-in-out;
 }
