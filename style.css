@@ -584,3 +584,57 @@ body {
         max-width: 550px !important;
     }
 }
+
+/* =========================
+   FIX COPYRIGHT CENTER SEMUA DEVICE
+   ========================= */
+
+.copyright {
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+
+    margin-left: auto !important;
+    margin-right: auto !important;
+
+    position: relative;
+    left: 0;
+    right: 0;
+}
+
+/* =========================
+   RAPATKAN SOSMED & DOWNLOAD CV
+   ========================= */
+
+/* Kurangi jarak bawah icon sosial */
+.button-group {
+    margin-bottom: 0.4rem !important;
+    gap: 14px !important;
+}
+
+/* Tombol download CV naik */
+.button-container a.btn-outline-dark {
+    margin-top: -0.2rem !important;
+    margin-bottom: 0.3rem !important;
+}
+
+/* Container tombol lebih padat */
+.button-container {
+    gap: 0 !important;
+    margin-bottom: -0.8rem !important;
+}
+
+/* Khusus mobile */
+@media screen and (max-width: 768px) {
+
+    .button-group {
+        margin-bottom: 0.2rem !important;
+        gap: 10px !important;
+    }
+
+    .button-container a.btn-outline-dark {
+        margin-top: -0.3rem !important;
+    }
+}
