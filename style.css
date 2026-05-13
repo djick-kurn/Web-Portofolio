@@ -520,3 +520,67 @@ body {
 .copyright {
     margin-top: -10px !important;
 }
+/* =========================
+   FIX CARD HILANG LANDSCAPE & PC
+   ========================= */
+
+/* Body boleh scroll vertikal */
+body {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* Container selalu tampil */
+.container {
+    min-height: 100vh !important;
+    height: auto !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    overflow: visible !important;
+}
+
+/* Card jangan terkunci tingginya */
+.card {
+    display: flex !important;
+    flex-direction: column !important;
+
+    height: auto !important;
+    min-height: unset !important;
+
+    max-height: none !important;
+
+    overflow: visible !important;
+
+    margin: auto !important;
+}
+
+/* Landscape */
+@media screen and (orientation: landscape) {
+
+    .container {
+        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+
+        align-items: flex-start !important;
+    }
+
+    .card {
+        width: 95% !important;
+        max-width: 700px !important;
+    }
+}
+
+/* PC/Desktop */
+@media screen and (min-width: 1024px) {
+
+    .container {
+        padding: 40px !important;
+    }
+
+    .card {
+        max-width: 550px !important;
+    }
+}
