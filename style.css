@@ -94,7 +94,13 @@ body {
 .bg-purple {
     background-color: #8b5cf6 !important; /* Warna ungu muda */
 }
+.bg-brown {
+    background-color: #6d4c41, !important;
+}
+.bg-ijo {
+    background-color: #7d8a36, !important;
 
+}
 /* Judul */
 .card h1 {
     font-family: 'Playfair Display', serif;
