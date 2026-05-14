@@ -1,898 +1,678 @@
-/* Import Font Elegan & Mewah */
+/* =========================
+   IMPORT FONT
+========================= */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;600&display=swap');
 
-/* Global Body */
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(90deg,#13278b, #3a6186, #89253e, #3a6186, #ff6a8f, #6a7fff);
-    background-size: 400% 400%;
-    animation: backgroundAnimation 10s ease-in-out infinite;
-    overflow: hidden;
-    position: relative;
-    font-family: 'Lora', serif;
-    text-rendering: optimizeLegibility;
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-
-/* Animasi Background */
-@keyframes backgroundAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Container agar margin atas & bawah seimbang */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    height: 80%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5vh 5vw;
-    box-sizing: border-box;
-}
-#datetime-container {
-    font-size: 9px;
-    font-weight: bold;
-    opacity: 0.5;
-    display: flex;
-    gap: 3px;
-    font-family: 'primary';
-}
-/* Card agar berada di tengah dengan margin seimbang */
-.card {
-    background-color: #f8f9fa;
-    border-radius: 1rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 480px;
-    text-align: center;
-    position: relative;
-    border: 3px solid #d4af37; /* Warna emas untuk kesan mewah */
-    font-family: 'Cormorant Garamond', serif;
-    display: flex;
-    flex-direction: column;
-    height: 80%;
-    margin-top: -35px;
-    margin-bottom: -20px;
-    
-}
-
-/* Pastikan card memiliki posisi relatif */
-.card {
-    position: relative;
-    margin-bottom: 1px; /* Menyesuaikan jarak dengan copyright */
-}
-
-/* Foto Profil */
-.profile-container {
-    position: relative;
-    display: inline-block;
-}
-
-.profile-img {
-    width: 10rem;
-    height: 10rem;
-    object-fit: cover;
-    object-position: center;
-    border: 5px solid #fff;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 0.2rem;
-    transition: all 0.3s ease;
-}
-
-.profile-img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
-}
-
-.bg-purple {
-    background-color: #8b5cf6 !important; /* Warna ungu muda */
-}
-.bg-brown {
-    background-color: #6d4c41 !important;
-}
-.bg-ijo {
-    background-color: #7d8a36 !important;
-
-}
-/* Judul */
-.card h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #343a40;
-    margin-bottom: 0.5rem;
-}
-
-/* Deskripsi */
-.card p {
-    font-family: 'Lora', serif;
-    color: #6c757d;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Scrollable Content */
-.scrollable-content {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 50vh;
-    padding-right: 10px;
-}
-
-/* Progress Bar */
-.progress {
-    height: 20px;
-}
-
-.progress-bar {
-    font-size: 0.9rem;
-    font-weight: bold;
-}
-
-.card h2 {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: #343a40;
-    margin-bottom: 1rem;
-}
-
-.garis-h2 {
-    border: none;
-    height: 3px;
-    background-color: #007bff;
-    margin-top: -5px;
-}
-
-
-/* Kontainer carousel */
-#carouselTestimoni {
-    position: relative;
-    padding: 0 45px;
-}
-
-/* Tombol kiri & kanan */
-#carouselTestimoni .carousel-control-prev,
-#carouselTestimoni .carousel-control-next {
-    width: 40px;
-}
-
-/* Geser tombol kiri */
-#carouselTestimoni .carousel-control-prev {
-    left: -15px;
-}
-
-/* Geser tombol kanan */
-#carouselTestimoni .carousel-control-next {
-    right: -15px;
-}
-
-/* Optional agar icon lebih elegan */
-#carouselTestimoni .carousel-control-prev-icon,
-#carouselTestimoni .carousel-control-next-icon {
-    background-size: 70% 70%;
-    filter: invert(1);
-    opacity: 0.7;
-}
-
-/* Responsive HP */
-@media (max-width: 768px) {
-    #carouselTestimoni {
-        padding: 0 35px;
-    }
-
-    #carouselTestimoni .carousel-control-prev {
-        left: -8px;
-    }
-
-    #carouselTestimoni .carousel-control-next {
-        right: -8px;
-    }
-}
-/* Portofolio Gambar */
-.proyek-img {
-    width: 15rem;
-    height: 45rem;
-    border: 1px solid #000000;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
-
-}
-/* Tombol Media Sosial */
-.social-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    margin-bottom: 0.1rem;
-}
-
-.social-btn i {
-    color: #333;
-}
-
-.social-btn:hover {
-    background-color: #ddd;
-}
-
-/* Warna Spesifik untuk Tiap Ikon */
-.social-btn:nth-child(1) i { color: #1877f2; } /* Facebook */
-.social-btn:nth-child(2) i { color: #0077b5; } /* LinkedIn */
-.social-btn:nth-child(3) i { color: #e4405f; } /* Instagram */
-.social-btn:nth-child(4) i { color: #d44638; } /* Email */
-
-/* Tombol Download CV */
-.button-container a.btn-outline-dark {
-    margin-bottom: 1rem;
-    margin-top: 0rem;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.overlay img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
-}
-
-.overlay.show {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Tombol Media Sosial Sejajar */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: -2rem;
-}
-
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-
-.instruction {
-    transition: opacity 0.5s ease-in-out;
-}
-
-/* Copyright 1px di bawah card */
-.copyright {
-    font-size: 14px;
-    text-align: center;
-    padding-top: 1px;
-    margin-top: 0.1px; /* Pastikan hanya berjarak 1px dari card */
-    margin-bottom: 0.1rem;
-    display: flex;
-    justify-content: center;
-}
-
-/* 🔹 RESPONSIF UNTUK MOBILE */
-@media (max-width: 480px) {
-    .container {
-        padding: 4vh 2vw;
-    }
-    .card {
-        width: 95%;
-        max-width: 340px;
-        padding: 2rem;
-    }
-    .profile-img {
-        width: 8rem;
-        height: 8rem;
-    }
-    .card h1 {
-        font-size: 1.6rem;
-    }
-    .card p {
-        font-size: 1rem;
-    }
-}
-
-/* 🔹 RESPONSIF UNTUK DESKTOP */
-@media (min-width: 1200px) {
-    .container {
-        padding: 6vh 6vw;
-    }
-    .card {
-        max-width: 550px;
-        padding: 3rem;
-    }
-    .profile-img {
-        width: 11rem;
-        height: 11rem;
-    }
-    .card h1 {
-        font-size: 2.3rem;
-    }
-    .card p {
-        font-size: 1.2rem;
-    }
-}
-
 
 /* =========================
-   FIX POSISI CARD RESPONSIF
-   ========================= */
+   BODY
+========================= */
+body{
+    min-height:100vh;
 
-/* Agar body bisa scroll jika tinggi layar kecil */
-body {
-    overflow-y: auto;
-    padding: 20px 0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px 10px;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    font-family:'Lora',serif;
+    text-rendering:optimizeLegibility;
+
+    background:
+        linear-gradient(
+            90deg,
+            #13278b,
+            #3a6186,
+            #89253e,
+            #3a6186,
+            #ff6a8f,
+            #6a7fff
+        );
+
+    background-size:250% 250%;
+    animation:backgroundAnimation 18s ease infinite;
 }
 
-/* Container lebih fleksibel terhadap tinggi layar */
-.container {
-    min-height: 100vh;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Card menyesuaikan tinggi layar */
-.card {
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
-    height: auto;
-    max-height: 90vh;
-}
-
-/* Scroll otomatis jika isi terlalu panjang */
-.scrollable-content {
-    max-height: 45vh;
-}
-
-/* Copyright tetap terlihat */
-.copyright {
-    margin-top: 8px;
-    margin-bottom: 10px;
-}
-
-/* KHUSUS layar pendek / HP kecil */
-@media (max-height: 700px) {
-
-    .container {
-        align-items: flex-start;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .card {
-        max-height: unset;
-    }
-
-    .scrollable-content {
-        max-height: none;
-    }
-}
-/* =================================
-   FIX LANDSCAPE AGAR H2 & BUTTON NORMAL
-   ================================= */
-
-@media screen and (orientation: landscape) and (max-height: 500px) {
-
-    body {
-        overflow-y: auto;
-        padding: 10px;
-    }
-
-    .container {
-        min-height: 100vh;
-        height: auto;
-        padding: 10px;
-        align-items: flex-start;
-    }
-
-    .card {
-        width: 95%;
-        max-width: 900px;
-        height: auto;
-        max-height: none;
-        margin: 0 auto !important;
-        padding: 1.2rem;
-        display: flex;
-        flex-direction: column; /* tetap vertikal */
-    }
-
-    /* Foto lebih kecil */
-    .profile-img {
-        width: 6rem;
-        height: 6rem;
-    }
-
-    /* Judul */
-    .card h1 {
-        font-size: 1.4rem;
-        margin-bottom: 0.3rem;
-    }
-
-    /* Deskripsi */
-    .card p {
-        font-size: 0.9rem;
-        margin-bottom: 0.8rem;
-    }
-
-    /* H2 tetap terlihat */
-    .card h2 {
-        font-size: 1rem;
-        margin-top: 0.5rem;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Scroll area */
-    .scrollable-content {
-        max-height: 35vh;
-        overflow-y: auto;
-        padding-right: 5px;
-    }
-
-    /* Tombol sosial tetap bawah */
-    .button-container {
-        margin-top: 1rem;
-        margin-bottom: 0;
-    }
-
-    .button-group {
-        gap: 12px;
-    }
-
-    .social-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
-    }
-
-    /* Download CV */
-    .button-container a.btn-outline-dark {
-        margin-top: 0.8rem;
-        margin-bottom: 0.5rem;
-    }
-
-    /* Copyright tetap bawah */
-    .copyright {
-        margin-top: 8px;
-        font-size: 12px;
-        text-align: center;
-    }
-}
-
-/* FIX posisi logo sosial tetap di atas tombol download */
-.button-group {
-    margin-bottom: 2.5rem !important;
-    flex-wrap: nowrap !important;
-}
-
-.button-container a.btn-outline-dark {
-    margin-top: 0 !important;
-}
-/* FIX scroll tetap berfungsi saat zoom */
-.scrollable-content {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    /* penting untuk mobile & zoom */
-    -webkit-overflow-scrolling: touch;
-
-    /* tinggi fleksibel */
-    flex: 1 1 auto;
-
-    /* mencegah scroll terkunci saat zoom */
-    min-height: 0;
-}
-
-/* parent flex harus mengizinkan child scroll */
-.card {
-    overflow: hidden;
-    min-height: 0;
-}
-
-/* khusus mobile */
-@media screen and (max-width: 768px) {
-    .scrollable-content {
-        max-height: 50vh !important;
-    }
-}
-
-/* khusus landscape */
-@media screen and (orientation: landscape) and (max-height: 500px) {
-    .scrollable-content {
-        max-height: 35vh !important;
-    }
-}
-/* Naikkan posisi container utama */
-.container {
-    transform: translateY(-20px);
-}
-/* FIX jarak datetime dengan foto profil */
-#datetime-container {
-    position: relative;
-    z-index: 99;
-
-    margin-bottom: 35px !important;
-}
-
-/* Turunkan area foto profil */
-.profile-container {
-    margin-top: 20px !important;
-}
-
-    
-/* Pendekkan ukuran container/card */
-.card {
-    max-height: calc(90vh - 20px) !important;
-    height: calc(auto - 20px);
-}
-
-/* Desktop */
-@media (min-width: 1200px) {
-    .card {
-        max-height: calc(90vh - 20px) !important;
-    }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-    .card {
-        max-height: calc(88vh - 20px) !important;
-    }
-}
-
-/* Naikkan copyright agar mepet ke container */
-.copyright {
-    margin-top: -10px !important;
-}
 /* =========================
-   FIX CARD HILANG LANDSCAPE & PC
-   ========================= */
+   BACKGROUND ANIMATION
+========================= */
+@keyframes backgroundAnimation{
 
-/* Body boleh scroll vertikal */
-body {
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-}
-
-/* Container selalu tampil */
-.container {
-    min-height: 100vh !important;
-    height: auto !important;
-
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-
-    overflow: visible !important;
-}
-
-/* Card jangan terkunci tingginya */
-.card {
-    display: flex !important;
-    flex-direction: column !important;
-
-    height: auto !important;
-    min-height: unset !important;
-
-    max-height: none !important;
-
-    overflow: visible !important;
-
-    margin: auto !important;
-}
-
-/* Landscape */
-@media screen and (orientation: landscape) {
-
-    .container {
-        padding-top: 20px !important;
-        padding-bottom: 20px !important;
-
-        align-items: flex-start !important;
+    0%{
+        background-position:0% 50%;
     }
 
-    .card {
-        width: 95% !important;
-        max-width: 700px !important;
-    }
-}
-
-/* PC/Desktop */
-@media screen and (min-width: 1024px) {
-
-    .container {
-        padding: 40px !important;
+    50%{
+        background-position:100% 50%;
     }
 
-    .card {
-        max-width: 550px !important;
+    100%{
+        background-position:0% 50%;
     }
 }
 
 /* =========================
-   FIX COPYRIGHT CENTER SEMUA DEVICE
-   ========================= */
+   CONTAINER
+========================= */
+.container{
+    width:100%;
+    max-width:1200px;
 
-.copyright {
-    width: 100%;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    text-align: center !important;
+    display:flex;
+    flex-direction:column;
 
-    margin-left: auto !important;
-    margin-right: auto !important;
+    justify-content:center;
+    align-items:center;
 
-    position: relative;
-    left: 0;
-    right: 0;
+    min-height:100vh;
 }
 
 /* =========================
-   RAPATKAN SOSMED & DOWNLOAD CV
-   ========================= */
+   CARD
+========================= */
+.card{
 
-/* Kurangi jarak bawah icon sosial */
-.button-group {
-    margin-bottom: 0.4rem !important;
-    gap: 14px !important;
-}
+    position:relative;
 
-/* Tombol download CV naik */
-.button-container a.btn-outline-dark {
-    margin-top: -0.2rem !important;
-    margin-bottom: 0.3rem !important;
-}
+    width:100%;
+    max-width:500px;
 
-/* Container tombol lebih padat */
-.button-container {
-    gap: 0 !important;
-    margin-bottom: -0.8rem !important;
-}
+    padding:2rem;
 
-/* Khusus mobile */
-@media screen and (max-width: 768px) {
+    border-radius:28px;
 
-    .button-group {
-        margin-bottom: 0.2rem !important;
-        gap: 10px !important;
-    }
+    border:1px solid rgba(255,255,255,0.25);
 
-    .button-container a.btn-outline-dark {
-        margin-top: -0.3rem !important;
-    }
-}
-/* =========================
-   ELEGANT GLASS EFFECT CONTAINER
-   ========================= */
+    background:rgba(255,255,255,0.16);
 
-.card {
-    background: rgba(255, 255, 255, 0.16) !important;
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(255,255,255,0.25) !important;
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
 
     box-shadow:
         0 8px 32px rgba(0,0,0,0.25),
-        0 0 25px rgba(255,255,255,0.08),
-        inset 0 1px 1px rgba(255,255,255,0.2);
+        inset 0 1px 1px rgba(255,255,255,0.15);
 
-    border-radius: 28px !important;
+    overflow:hidden;
 
-    overflow: hidden;
-    position: relative;
+    display:flex;
+    flex-direction:column;
 
-    transition: all 0.4s ease;
+    transition:transform .35s ease,
+               box-shadow .35s ease;
 }
 
-/* Glow animasi hidup */
-.card::before {
-    content: "";
+/* Glow halus */
+.card::before{
 
-    position: absolute;
-    inset: -2px;
+    content:"";
 
-    background: linear-gradient(
-        130deg,
-        rgba(255,255,255,0.25),
-        rgba(255,255,255,0.05),
-        rgba(255,255,255,0.25)
-    );
+    position:absolute;
+    inset:-2px;
 
-    background-size: 300% 300%;
+    border-radius:30px;
 
-    animation: elegantGlow 8s ease infinite;
+    background:
+        linear-gradient(
+            130deg,
+            rgba(255,255,255,0.15),
+            rgba(255,255,255,0.02),
+            rgba(255,255,255,0.15)
+        );
 
-    z-index: 0;
+    background-size:300% 300%;
 
-    border-radius: 30px;
+    animation:elegantGlow 10s ease infinite;
 
-    opacity: 0.6;
+    opacity:.6;
+
+    z-index:0;
+
+    pointer-events:none;
 }
 
-/* Isi card di atas efek */
-.card > * {
-    position: relative;
-    z-index: 2;
+/* Semua isi di atas efek */
+.card > *{
+    position:relative;
+    z-index:2;
 }
 
 /* Hover desktop */
-.card:hover {
-    transform: translateY(-4px) scale(1.01);
+@media (hover:hover){
 
-    box-shadow:
-        0 12px 40px rgba(0,0,0,0.35),
-        0 0 35px rgba(255,255,255,0.15);
+    .card:hover{
+
+        transform:translateY(-4px);
+
+        box-shadow:
+            0 12px 40px rgba(0,0,0,0.3),
+            inset 0 1px 1px rgba(255,255,255,0.2);
+    }
 }
 
-/* Animasi gradient glow */
-@keyframes elegantGlow {
+/* Glow animation */
+@keyframes elegantGlow{
 
-    0% {
-        background-position: 0% 50%;
+    0%{
+        background-position:0% 50%;
     }
 
-    50% {
-        background-position: 100% 50%;
+    50%{
+        background-position:100% 50%;
     }
 
-    100% {
-        background-position: 0% 50%;
+    100%{
+        background-position:0% 50%;
     }
 }
 
 /* =========================
-   HEADER & TEXT PREMIUM
-   ========================= */
+   DATETIME
+========================= */
+#datetime-container{
 
-.card h1 {
-    color: #ffffff !important;
+    position:absolute;
+
+    top:12px;
+    right:12px;
+
+    z-index:5;
+
+    display:flex;
+    align-items:center;
+    gap:4px;
+
+    padding:6px 10px;
+
+    border-radius:10px;
+
+    font-size:10px;
+    font-weight:700;
+
+    color:#fff;
+
+    background:rgba(0,0,0,.4);
+
+    backdrop-filter:blur(8px);
+}
+
+/* =========================
+   PROFILE
+========================= */
+.profile-container{
+    margin-top:18px;
+}
+
+.profile-img{
+
+    width:10rem;
+    height:10rem;
+
+    object-fit:cover;
+    object-position:center;
+
+    border-radius:50%;
+
+    border:3px solid rgba(255,255,255,.7);
+
+    box-shadow:
+        0 0 20px rgba(255,255,255,.18);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.profile-img:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+        0 0 28px rgba(255,255,255,.28);
+}
+
+/* =========================
+   TYPOGRAPHY
+========================= */
+.card h1{
+
+    font-family:'Playfair Display',serif;
+
+    font-size:2rem;
+    font-weight:700;
+
+    color:rgba(255,255,255,.94);
+
+    margin-bottom:.6rem;
 
     text-shadow:
-        0 2px 8px rgba(0,0,0,0.4),
-        0 0 10px rgba(255,255,255,0.2);
-
-    letter-spacing: 1px;
+        0 2px 8px rgba(0,0,0,.35);
 }
 
-.card h2 {
-    color: #ffffff !important;
+.card h2{
+
+    font-size:1.15rem;
+    font-weight:900;
+
+    color:rgba(255,255,255,.92);
+
+    margin-bottom:.8rem;
 
     text-shadow:
-        0 1px 6px rgba(0,0,0,0.35);
+        0 1px 5px rgba(0,0,0,.3);
 }
 
-.card p {
-    color: rgba(255,255,255,0.88) !important;
-}
-
-/* =========================
-   FOTO PROFIL LEBIH HIDUP
-   ========================= */
-
-.profile-img {
-
-    border: 3px solid rgba(255,255,255,0.7) !important;
-
-    box-shadow:
-        0 0 20px rgba(255,255,255,0.2),
-        0 0 40px rgba(255,255,255,0.12);
-
-    transition: all 0.4s ease;
-}
-
-.profile-img:hover {
-
-    transform: scale(1.06);
-
-    box-shadow:
-        0 0 30px rgba(255,255,255,0.35),
-        0 0 60px rgba(255,255,255,0.18);
+.card p{
+    color:rgba(255,255,255,.86);
+    font-size:1rem;
 }
 
 /* =========================
-   SCROLL AREA MODERN
-   ========================= */
+   GARIS H2
+========================= */
+.garis-h2{
 
-.scrollable-content::-webkit-scrollbar {
-    width: 6px;
-}
+    border:none;
 
-.scrollable-content::-webkit-scrollbar-track {
-    background: rgba(255,255,255,0.08);
-    border-radius: 20px;
-}
+    height:3px;
 
-.scrollable-content::-webkit-scrollbar-thumb {
-    background: rgba(255,255,255,0.35);
-    border-radius: 20px;
-}
+    border-radius:10px;
 
-/* =========================
-   ICON SOSMED ELEGANT
-   ========================= */
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.9),
+            rgba(255,255,255,.1)
+        );
 
-.social-btn {
-
-    background: rgba(255,255,255,0.12);
-
-    backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255,255,255,0.15);
-
-    box-shadow:
-        0 4px 12px rgba(0,0,0,0.15);
-
-    transition: all 0.3s ease;
-}
-
-.social-btn:hover {
-
-    transform: translateY(-3px) scale(1.08);
-
-    background: rgba(255,255,255,0.2);
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.25),
-        0 0 15px rgba(255,255,255,0.15);
+    margin-top:-2px;
+    margin-bottom:1rem;
 }
 
 /* =========================
-   TOMBOL DOWNLOAD PREMIUM
-   ========================= */
+   SCROLLABLE CONTENT
+========================= */
+.scrollable-content{
 
-.button-container .btn-outline-dark {
+    flex:1;
 
-    border-radius: 14px !important;
+    overflow-y:auto;
+    overflow-x:hidden;
 
-    padding: 10px 22px;
+    max-height:48vh;
 
-    background: rgba(255,255,255,0.15);
+    padding-right:6px;
 
-    color: white !important;
+    min-height:0;
 
-    border: 1px solid rgba(255,255,255,0.2);
-
-    backdrop-filter: blur(12px);
-
-    transition: all 0.3s ease;
+    -webkit-overflow-scrolling:touch;
 }
 
-.button-container .btn-outline-dark:hover {
+/* Scrollbar */
+.scrollable-content::-webkit-scrollbar{
+    width:5px;
+}
 
-    transform: translateY(-2px);
+.scrollable-content::-webkit-scrollbar-track{
+    background:rgba(255,255,255,.08);
+    border-radius:20px;
+}
 
-    background: rgba(255,255,255,0.25);
+.scrollable-content::-webkit-scrollbar-thumb{
+    background:rgba(255,255,255,.28);
+    border-radius:20px;
+}
+
+/* =========================
+   PROGRESS BAR
+========================= */
+.progress{
+    height:20px;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    font-size:.82rem;
+    font-weight:700;
+}
+
+/* =========================
+   CUSTOM COLOR
+========================= */
+.bg-purple{
+    background-color:#8b5cf6 !important;
+}
+
+.bg-brown{
+    background-color:#6d4c41 !important;
+}
+
+.bg-ijo{
+    background-color:#7d8a36 !important;
+}
+
+.bg-blue{
+    background-color:#0d6efd !important;
+}
+
+/* =========================
+   LIST GROUP
+========================= */
+.list-group-item{
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    margin-bottom:6px;
+
+    border-radius:12px !important;
+
+    backdrop-filter:blur(6px);
+}
+
+/* =========================
+   CAROUSEL
+========================= */
+#carouselTestimoni{
+    position:relative;
+    padding:0 35px;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+    width:35px;
+}
+
+.carousel-control-prev{
+    left:-10px;
+}
+
+.carousel-control-next{
+    right:-10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon{
+    background-size:70% 70%;
+    filter:invert(1);
+    opacity:.8;
+}
+
+/* =========================
+   BUTTON AREA
+========================= */
+.button-container{
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    margin-top:1rem;
+}
+
+.button-group{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    gap:14px;
+
+    flex-wrap:nowrap;
+
+    margin-bottom:.4rem;
+}
+
+/* =========================
+   SOCIAL BUTTON
+========================= */
+.social-btn{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:50% !important;
+
+    background:rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    backdrop-filter:blur(10px);
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,0.2);
+        0 4px 12px rgba(0,0,0,.15);
+
+    transition:
+        transform .3s ease,
+        background .3s ease;
+}
+
+.social-btn i{
+    transition:transform .3s ease;
+}
+
+/* Hover */
+.social-btn:hover{
+
+    transform:translateY(-3px);
+
+    background:rgba(255,255,255,.22);
+}
+
+.social-btn:hover i{
+    transform:scale(1.12);
+}
+
+/* Warna icon */
+.social-btn:nth-child(1) i{
+    color:#1877f2;
+}
+
+.social-btn:nth-child(2) i{
+    color:#0077b5;
+}
+
+.social-btn:nth-child(3) i{
+    color:#e4405f;
+}
+
+.social-btn:nth-child(4) i{
+    color:#d44638;
+}
+
+/* =========================
+   DOWNLOAD BUTTON
+========================= */
+#downloadCV{
+
+    margin-top:.3rem;
+
+    border-radius:14px;
+
+    padding:10px 22px;
+
+    background:rgba(255,255,255,.15);
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    backdrop-filter:blur(10px);
+
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+}
+
+#downloadCV:hover{
+
+    transform:translateY(-2px);
+
+    background:rgba(255,255,255,.22);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.18);
+}
+
+/* =========================
+   COPYRIGHT
+========================= */
+.copyright{
+
+    width:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    color:rgba(255,255,255,.85);
+}
+
+/* =========================
+   MODAL IMAGE
+========================= */
+.modal-content{
+
+    background:rgba(20,20,20,.85);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width:768px){
+
+    body{
+        padding:14px 8px;
+    }
+
+    .card{
+
+        max-width:360px;
+
+        padding:1.4rem;
+    }
+
+    .profile-img{
+
+        width:8rem;
+        height:8rem;
+    }
+
+    .card h1{
+        font-size:1.6rem;
+    }
+
+    .card p{
+        font-size:.95rem;
+    }
+
+    .scrollable-content{
+        max-height:50vh;
+    }
+
+    .button-group{
+        gap:10px;
+    }
+
+    .social-btn{
+
+        width:42px;
+        height:42px;
+    }
+}
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
+@media screen and (orientation:landscape)
+and (max-height:500px){
+
+    body{
+        padding:10px;
+    }
+
+    .container{
+        align-items:flex-start;
+    }
+
+    .card{
+
+        max-width:720px;
+
+        padding:1rem;
+    }
+
+    .profile-img{
+
+        width:6rem;
+        height:6rem;
+    }
+
+    .card h1{
+        font-size:1.35rem;
+    }
+
+    .card p{
+        font-size:.88rem;
+    }
+
+    .scrollable-content{
+        max-height:38vh;
+    }
+
+    .social-btn{
+
+        width:38px;
+        height:38px;
+    }
+}
+
+/* =========================
+   DESKTOP LARGE
+========================= */
+@media (min-width:1200px){
+
+    .card{
+        max-width:550px;
+    }
+
+    .profile-img{
+
+        width:11rem;
+        height:11rem;
+    }
+
+    .card h1{
+        font-size:2.2rem;
+    }
 }
