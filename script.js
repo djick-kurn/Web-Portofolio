@@ -106,6 +106,72 @@ setInterval(updateDateTime, 1000);
         startAutoSlide();
     }
 
+
+    // ================================
+    // MODAL DETAIL PENGALAMAN KERJA
+    // ================================
+    const experienceItems = document.querySelectorAll(".experience-item");
+    const experienceModalElement = document.getElementById("experienceModal");
+
+    if (experienceItems.length && experienceModalElement && typeof bootstrap !== "undefined") {
+        // Modal dipindahkan ke <body> agar tidak terpotong oleh .card (overflow:hidden)
+        // dan tidak tertutup oleh stacking context/z-index milik card.
+        if (experienceModalElement.parentElement !== document.body) {
+            document.body.appendChild(experienceModalElement);
+        }
+
+        const experienceModal = bootstrap.Modal.getOrCreateInstance(experienceModalElement, {
+            backdrop: true,
+            keyboard: true,
+            focus: true
+        });
+        const titleElement = document.getElementById("experienceModalTitle");
+        const periodElement = document.getElementById("experienceModalPeriod");
+        const descriptionElement = document.getElementById("experienceModalDescription");
+        const closeButtons = experienceModalElement.querySelectorAll('[data-bs-dismiss="modal"]');
+
+        function showExperience(item) {
+            titleElement.textContent = item.dataset.title || "Pengalaman Kerja";
+            periodElement.textContent = item.dataset.period ? "Periode: " + item.dataset.period : "";
+            descriptionElement.textContent = item.dataset.description || "Deskripsi pengalaman belum tersedia.";
+            experienceModal.show();
+        }
+
+        function closeExperience() {
+            experienceModal.hide();
+        }
+
+        experienceItems.forEach(function (item) {
+            item.addEventListener("click", function (event) {
+                event.preventDefault();
+                showExperience(item);
+            });
+
+            item.addEventListener("keydown", function (event) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    showExperience(item);
+                }
+            });
+        });
+
+        // Pastikan tombol X dan OK selalu menutup modal.
+        closeButtons.forEach(function (button) {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                closeExperience();
+            });
+        });
+
+        // Klik area backdrop di luar kotak modal juga menutup.
+        experienceModalElement.addEventListener("click", function (event) {
+            if (event.target === experienceModalElement) {
+                closeExperience();
+            }
+        });
+    }
+
     // Menampilkan tahun secara otomatis di footer
     const yearElement = document.getElementById("year");
     if (yearElement) {
