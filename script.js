@@ -715,7 +715,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         max-height: none !important;
 
-        margin: 0 0 18px 0 !important;
+        margin: 0 0 15px 0 !important;
 
         padding: 0 !important;
 
@@ -823,7 +823,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       .pdf-owner-title {
 
-        font-size: 13px;
+        font-size: 11px;
 
         font-weight: 700;
 
@@ -841,7 +841,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         align-items: center;
 
-        gap: 8px;
+        gap: 5px;
 
         margin-bottom: 0px;
 
@@ -853,9 +853,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       .pdf-owner-row i {
 
-        width: 18px;
+        width: 15px;
 
-        min-width: 18px;
+        min-width: 15px;
 
         text-align: center;
 
@@ -1176,12 +1176,12 @@ const margin =
 
 const usableWidth =
   pageWidth -
-  (margin * 2);
+  (margin * 0);
 
 
 const usableHeight =
   pageHeight -
-  (margin * 2);
+  (margin * 0);
 
 
 // =====================================================
