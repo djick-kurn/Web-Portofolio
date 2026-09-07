@@ -803,7 +803,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         box-sizing: border-box;
 
-        padding: 10px 20px;
+        padding: 5px 10px;
 
         margin: 0 0 0px 0;
 
@@ -829,7 +829,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         letter-spacing: 1px;
 
-        margin-bottom: 5px;
+        margin-bottom: 0px;
 
       }
 
@@ -867,7 +867,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         margin-top: 0px;
 
-        padding-top: 5px;
+        padding-top: 0px;
 
         border-top: 1px solid #eeeeee;
 
