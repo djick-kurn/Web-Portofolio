@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // UKURAN F4 / FOLIO INDONESIA
+    // UKURAN F4 / FOLIO
     // =======================================================
 
     const pageWidth =
@@ -89,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // =======================================================
     // MARGIN 0,5 CM
+    // 5 MM = 0,5 CM
     // =======================================================
 
     const marginX =
@@ -101,6 +102,10 @@ document.addEventListener("DOMContentLoaded", () => {
       5;
 
 
+    // =======================================================
+    // AREA CETAK AKTUAL
+    // =======================================================
+
     const usableWidth =
       pageWidth -
       (marginX * 2);
@@ -112,20 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // KONVERSI PX <-> MM
+    // BASE RENDER WIDTH
+    //
+    // Lebih besar supaya hasil teks dan foto tajam.
     // =======================================================
 
-    const PX_PER_MM =
-      96 / 25.4;
-
-    const usableHeightPx =
-      usableHeight *
-      PX_PER_MM;
-
-
-    const targetAspect =
-      usableHeight /
-      usableWidth;
+    const BASE_WIDTH =
+      1200;
 
 
     // =======================================================
@@ -142,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // HAPUS ELEMEN YANG MEMANG TIDAK DIPERLUKAN DI PDF
+    // HAPUS ELEMEN YANG TIDAK PERLU DI PDF
     // =======================================================
 
     clone.querySelectorAll(
@@ -153,8 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // PENGALAMAN
-    // PERTAHANKAN SEMUA
+    // PENGALAMAN KERJA
+    // SEMUA TETAP DITAMPILKAN
     // =======================================================
 
     clone.querySelectorAll(
@@ -196,6 +194,9 @@ document.addEventListener("DOMContentLoaded", () => {
         replacement.style.maxHeight =
           "none";
 
+        replacement.style.overflow =
+          "visible";
+
         el.replaceWith(
           replacement
         );
@@ -205,8 +206,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // CAROUSEL
-    // SEMUA TESTIMONIAL TETAP MASUK
+    // CAROUSEL TESTIMONIAL
+    // SEMUA TESTIMONIAL DITAMPILKAN
     // =======================================================
 
     clone.querySelectorAll(
@@ -230,6 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
           "data-bs-wrap"
         );
 
+
         carousel.style.cssText +=
           ";display:block!important;" +
           "position:relative!important;" +
@@ -249,7 +251,9 @@ document.addEventListener("DOMContentLoaded", () => {
           );
 
 
-        if (!inner) return;
+        if (!inner) {
+          return;
+        }
 
 
         inner.style.cssText +=
@@ -283,6 +287,7 @@ document.addEventListener("DOMContentLoaded", () => {
               "active"
             );
 
+
             item.style.cssText +=
               ";display:block!important;" +
               "position:relative!important;" +
@@ -302,6 +307,7 @@ document.addEventListener("DOMContentLoaded", () => {
               "transform:none!important;" +
               "transition:none!important;" +
               "animation:none!important;" +
+              "overflow:visible!important;" +
               "break-inside:avoid!important;" +
               "page-break-inside:avoid!important;";
 
@@ -329,11 +335,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 "div"
               );
 
+
             label.className =
               "pdf-carousel-label";
 
+
             label.textContent =
               `Testimoni ${index + 1}`;
+
 
             item.insertBefore(
               label,
@@ -371,7 +380,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // INFORMASI KONTAK PEMILIK
+    // INFORMASI KONTAK
     // =======================================================
 
     const ownerContact =
@@ -408,14 +417,9 @@ document.addEventListener("DOMContentLoaded", () => {
           ${new Date().toLocaleDateString(
             "id-ID",
             {
-              day:
-                "2-digit",
-
-              month:
-                "2-digit",
-
-              year:
-                "numeric"
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric"
             }
           )}
 
@@ -433,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // CSS KHUSUS PDF
+    // CSS KHUSUS EXPORT PDF
     // =======================================================
 
     const pdfStyle =
@@ -444,722 +448,817 @@ document.addEventListener("DOMContentLoaded", () => {
 
     pdfStyle.textContent = `
 
-      /* ===================================================
-         RESET UTAMA PDF
-         =================================================== */
+      /* =====================================================
+         PDF ROOT
+         ===================================================== */
 
-      .pdf-export-mode{
+      .pdf-export-mode {
 
         width:
-          var(--pdf-render-width,800px)!important;
+          var(--pdf-layout-width, 1200px) !important;
 
         max-width:
-          var(--pdf-render-width,800px)!important;
+          var(--pdf-layout-width, 1200px) !important;
 
         min-width:
-          var(--pdf-render-width,800px)!important;
+          var(--pdf-layout-width, 1200px) !important;
 
         height:
-          auto!important;
+          auto !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         max-height:
-          none!important;
+          none !important;
 
         margin:
-          0!important;
+          0 !important;
 
         padding:
-          0!important;
+          0 !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
         border-radius:
-          0!important;
+          0 !important;
 
         box-shadow:
-          none!important;
+          none !important;
 
         border:
-          0!important;
+          0 !important;
 
         background:
-          #fff!important;
+          #ffffff !important;
 
         box-sizing:
-          border-box!important;
+          border-box !important;
 
         transform:
-          none!important;
+          scale(
+            var(--pdf-scale, 1)
+          ) !important;
 
-        page-break-inside:
-          avoid!important;
+        transform-origin:
+          top left !important;
 
       }
 
 
-      /* ===================================================
-         HENTIKAN SEMUA ANIMASI
-         =================================================== */
+      /* =====================================================
+         MATIKAN ANIMASI
+         ===================================================== */
 
       .pdf-export-mode *,
       .pdf-export-mode *::before,
-      .pdf-export-mode *::after{
+      .pdf-export-mode *::after {
 
         animation:
-          none!important;
+          none !important;
 
         transition:
-          none!important;
-
-        transform:
-          none!important;
+          none !important;
 
       }
 
 
-      /* ===================================================
-         HERO
-         =================================================== */
-
-      .pdf-export-mode .hero{
-
-        padding:
-          12px 30px 13px!important;
-
-        margin:
-          0!important;
-
-      }
-
-
-      .pdf-export-mode .topbar{
-
-        margin-bottom:
-          11px!important;
-
-      }
-
-
-      .pdf-export-mode .hero-grid{
-
-        grid-template-columns:
-          115px 1fr!important;
-
-        gap:
-          20px!important;
-
-      }
-
-
-      .pdf-export-mode .profile-ring{
-
-        width:
-          100px!important;
-
-        height:
-          100px!important;
-
-        padding:
-          4px!important;
-
-      }
-
-
-      .pdf-export-mode .availability{
-
-        margin-top:
-          4px!important;
-
-        font-size:
-          7px!important;
-
-      }
-
-
-      .pdf-export-mode .hero h1{
-
-        font-size:
-          35px!important;
-
-        line-height:
-          1!important;
-
-        margin-bottom:
-          3px!important;
-
-      }
-
-
-      .pdf-export-mode .lead{
-
-        font-size:
-          9px!important;
-
-        line-height:
-          1.3!important;
-
-      }
-
-
-      .pdf-export-mode .hero-actions{
-
-        display:
-          none!important;
-
-      }
-
-
-      /* ===================================================
-         CONTENT
-         =================================================== */
-
-      .pdf-export-mode .content{
-
-        padding:
-          0 30px 0!important;
-
-        margin:
-          0!important;
-
-      }
-
-
-      /* ===================================================
-         SECTION
-         =================================================== */
-
-      .pdf-export-mode .section{
-
-        padding:
-          7px 0!important;
-
-        margin:
-          0!important;
-
-        border-bottom:
-          1px solid #e4e7ec!important;
-
-        page-break-inside:
-          avoid!important;
-
-      }
-
-
-      .pdf-export-mode .section-heading{
-
-        margin-bottom:
-          5px!important;
-
-        gap:
-          7px!important;
-
-      }
-
-
-      .pdf-export-mode .section h2{
-
-        font-size:
-          17px!important;
-
-        line-height:
-          1.05!important;
-
-      }
-
-
-      .pdf-export-mode .section-intro{
-
-        font-size:
-          7.5px!important;
-
-        margin-top:
-          -2px!important;
-
-        margin-bottom:
-          5px!important;
-
-      }
-
-
-      /* ===================================================
-         SKILLS
-         =================================================== */
-
-      .pdf-export-mode .skills-grid{
-
-        gap:
-          3px!important;
-
-      }
-
-
-      .pdf-export-mode .skill-card{
-
-        grid-template-columns:
-          22px 1fr!important;
-
-        gap:
-          5px!important;
-
-        padding:
-          4px 6px!important;
-
-        border-radius:
-          5px!important;
-
-      }
-
-
-      .pdf-export-mode .skill-icon{
-
-        width:
-          22px!important;
-
-        height:
-          22px!important;
-
-        border-radius:
-          4px!important;
-
-        font-size:
-          8px!important;
-
-      }
-
-
-      .pdf-export-mode .skill-card strong{
-
-        font-size:
-          7.5px!important;
-
-      }
-
-
-      .pdf-export-mode .skill-card small{
-
-        font-size:
-          6.5px!important;
-
-      }
-
-
-      .pdf-export-mode .skill-track{
-
-        height:
-          3px!important;
-
-        margin-top:
-          2px!important;
-
-      }
-
-
-      /* ===================================================
-         EXPERIENCE
-         =================================================== */
-
-      .pdf-export-mode .experience-item,
-      .pdf-export-mode .pdf-experience-static{
-
-        grid-template-columns:
-          12px 1fr auto!important;
-
-        gap:
-          6px!important;
-
-        padding:
-          3px 2px 3px 0!important;
-
-        margin:
-          0!important;
+      /* =====================================================
+         JANGAN GUNAKAN FIXED HEIGHT
+         ===================================================== */
+
+      .pdf-export-mode .row,
+      .pdf-export-mode .col,
+      .pdf-export-mode [class*="col-"] {
 
         min-height:
-          0!important;
+          0 !important;
 
         height:
-          auto!important;
-
-        max-height:
-          none!important;
-
-        overflow:
-          visible!important;
-
-        page-break-inside:
-          avoid!important;
+          auto !important;
 
       }
 
 
-      .pdf-export-mode .timeline-dot{
+      /* =====================================================
+         HERO
+         ===================================================== */
 
-        width:
-          7px!important;
+      .pdf-export-mode .hero {
+
+        padding:
+          14px 30px 15px !important;
+
+        margin:
+          0 !important;
+
+        min-height:
+          0 !important;
 
         height:
-          7px!important;
+          auto !important;
 
       }
 
 
-      .pdf-export-mode .experience-main{
+      .pdf-export-mode .topbar {
+
+        margin-bottom:
+          10px !important;
+
+      }
+
+
+      .pdf-export-mode .hero-grid {
+
+        grid-template-columns:
+          105px 1fr !important;
 
         gap:
-          1px!important;
+          18px !important;
+
+        align-items:
+          center !important;
 
       }
 
 
-      .pdf-export-mode .experience-main strong{
+      .pdf-export-mode .profile-ring {
+
+        width:
+          94px !important;
+
+        height:
+          94px !important;
+
+        padding:
+          4px !important;
+
+        flex-shrink:
+          0 !important;
+
+      }
+
+
+      .pdf-export-mode .profile-ring img {
+
+        width:
+          100% !important;
+
+        height:
+          100% !important;
+
+        object-fit:
+          cover !important;
+
+        display:
+          block !important;
+
+      }
+
+
+      .pdf-export-mode .availability {
+
+        margin-top:
+          4px !important;
 
         font-size:
-          8px!important;
+          7px !important;
+
+      }
+
+
+      .pdf-export-mode .hero h1 {
+
+        font-size:
+          34px !important;
 
         line-height:
-          1.15!important;
+          1 !important;
+
+        margin:
+          0 0 4px !important;
+
+      }
+
+
+      .pdf-export-mode .lead {
+
+        font-size:
+          9px !important;
+
+        line-height:
+          1.3 !important;
+
+        margin:
+          0 !important;
+
+      }
+
+
+      .pdf-export-mode .hero-actions {
+
+        display:
+          none !important;
+
+      }
+
+
+      /* =====================================================
+         CONTENT
+         ===================================================== */
+
+      .pdf-export-mode .content {
+
+        width:
+          100% !important;
+
+        padding:
+          0 30px !important;
+
+        margin:
+          0 !important;
+
+        box-sizing:
+          border-box !important;
+
+      }
+
+
+      /* =====================================================
+         SECTION
+         ===================================================== */
+
+      .pdf-export-mode .section {
+
+        padding:
+          6px 0 !important;
+
+        margin:
+          0 !important;
+
+        border-bottom:
+          1px solid #e4e7ec !important;
+
+        height:
+          auto !important;
+
+        min-height:
+          0 !important;
+
+        max-height:
+          none !important;
+
+        overflow:
+          visible !important;
+
+        page-break-inside:
+          avoid !important;
+
+      }
+
+
+      .pdf-export-mode .section-heading {
+
+        margin-bottom:
+          4px !important;
+
+        gap:
+          6px !important;
+
+      }
+
+
+      .pdf-export-mode .section h2 {
+
+        font-size:
+          16px !important;
+
+        line-height:
+          1.05 !important;
+
+        margin:
+          0 !important;
+
+      }
+
+
+      .pdf-export-mode .section-intro {
+
+        font-size:
+          7px !important;
+
+        line-height:
+          1.2 !important;
+
+        margin:
+          -1px 0 4px !important;
+
+      }
+
+
+      /* =====================================================
+         SKILLS
+         ===================================================== */
+
+      .pdf-export-mode .skills-grid {
+
+        gap:
+          3px !important;
+
+        margin:
+          0 !important;
+
+      }
+
+
+      .pdf-export-mode .skill-card {
+
+        grid-template-columns:
+          21px 1fr !important;
+
+        gap:
+          5px !important;
+
+        padding:
+          4px 6px !important;
+
+        border-radius:
+          5px !important;
+
+        min-height:
+          0 !important;
+
+        height:
+          auto !important;
+
+      }
+
+
+      .pdf-export-mode .skill-icon {
+
+        width:
+          21px !important;
+
+        height:
+          21px !important;
+
+        border-radius:
+          4px !important;
+
+        font-size:
+          8px !important;
+
+      }
+
+
+      .pdf-export-mode .skill-card strong {
+
+        font-size:
+          7.5px !important;
+
+        line-height:
+          1.1 !important;
+
+      }
+
+
+      .pdf-export-mode .skill-card small {
+
+        font-size:
+          6.5px !important;
+
+        line-height:
+          1.1 !important;
+
+      }
+
+
+      .pdf-export-mode .skill-track {
+
+        height:
+          3px !important;
+
+        margin-top:
+          2px !important;
+
+      }
+
+
+      /* =====================================================
+         EXPERIENCE
+         ===================================================== */
+
+      .pdf-export-mode .experience-item,
+      .pdf-export-mode .pdf-experience-static {
+
+        grid-template-columns:
+          12px 1fr auto !important;
+
+        gap:
+          6px !important;
+
+        padding:
+          3px 2px 3px 0 !important;
+
+        margin:
+          0 !important;
+
+        min-height:
+          0 !important;
+
+        height:
+          auto !important;
+
+        max-height:
+          none !important;
+
+        overflow:
+          visible !important;
+
+        page-break-inside:
+          avoid !important;
+
+      }
+
+
+      .pdf-export-mode .timeline-dot {
+
+        width:
+          7px !important;
+
+        height:
+          7px !important;
+
+      }
+
+
+      .pdf-export-mode .experience-main {
+
+        gap:
+          1px !important;
+
+      }
+
+
+      .pdf-export-mode .experience-main strong {
+
+        font-size:
+          8px !important;
+
+        line-height:
+          1.15 !important;
 
       }
 
 
       .pdf-export-mode .experience-main small,
-      .pdf-export-mode .experience-period{
+      .pdf-export-mode .experience-period {
 
         font-size:
-          7px!important;
+          7px !important;
 
         line-height:
-          1.15!important;
+          1.15 !important;
 
       }
 
 
-      .pdf-export-mode .experience-period i{
+      .pdf-export-mode .experience-period i {
 
         font-size:
-          6px!important;
+          6px !important;
 
       }
 
 
-      /* ===================================================
+      /* =====================================================
          SPLIT SECTION
-         =================================================== */
+         ===================================================== */
 
-      .pdf-export-mode .split-section{
+      .pdf-export-mode .split-section {
 
         gap:
-          14px!important;
+          14px !important;
 
       }
 
 
-      /* ===================================================
+      /* =====================================================
          ORGANISASI
-         =================================================== */
+         ===================================================== */
 
-      .pdf-export-mode .org-list div{
+      .pdf-export-mode .org-list {
+
+        margin:
+          0 !important;
+
+      }
+
+
+      .pdf-export-mode .org-list div {
 
         padding:
-          3px 0!important;
+          3px 0 !important;
 
         grid-template-columns:
-          minmax(0,1fr) 110px!important;
+          minmax(0, 1fr) 110px !important;
 
         gap:
-          1px 6px!important;
+          1px 6px !important;
+
+        min-height:
+          0 !important;
 
       }
 
 
       .pdf-export-mode .org-list span,
-      .pdf-export-mode .org-list small{
+      .pdf-export-mode .org-list small {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
+
+        line-height:
+          1.15 !important;
 
       }
 
 
-      .pdf-export-mode .org-list strong{
+      .pdf-export-mode .org-list strong {
 
         font-size:
-          7px!important;
+          7px !important;
+
+        line-height:
+          1.15 !important;
 
       }
 
 
-      /* ===================================================
+      /* =====================================================
          TESTIMONIAL
-         =================================================== */
+         ===================================================== */
 
-      .pdf-export-mode .testimonial-box{
+      .pdf-export-mode .testimonial-box {
 
         padding:
-          6px 8px 5px!important;
+          6px 8px 5px !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         height:
-          auto!important;
+          auto !important;
 
         max-height:
-          none!important;
+          none !important;
 
         border-radius:
-          6px!important;
+          6px !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
         page-break-inside:
-          avoid!important;
+          avoid !important;
 
       }
 
 
-      .pdf-export-mode .testimonial-box p{
+      .pdf-export-mode .testimonial-box p {
 
         font-size:
-          8px!important;
+          8px !important;
 
         line-height:
-          1.2!important;
+          1.2 !important;
 
         margin:
-          2px 0 3px!important;
+          2px 0 3px !important;
 
       }
 
 
-      .pdf-export-mode .testimonial-box span{
+      .pdf-export-mode .testimonial-box span {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
       }
 
 
-      .pdf-export-mode .pdf-carousel-label{
+      .pdf-export-mode .pdf-carousel-label {
 
         display:
-          block!important;
+          block !important;
 
         font-size:
-          6px!important;
+          6px !important;
 
         line-height:
-          1.1!important;
+          1.1 !important;
 
         font-weight:
-          700!important;
+          700 !important;
 
         letter-spacing:
-          .35px!important;
+          .35px !important;
 
         opacity:
-          .6!important;
+          .6 !important;
 
         margin:
-          0 0 2px!important;
+          0 0 2px !important;
 
       }
 
 
-      .pdf-export-mode .carousel-item{
+      .pdf-export-mode .carousel-item {
 
         margin-bottom:
-          2px!important;
+          2px !important;
 
         height:
-          auto!important;
+          auto !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         max-height:
-          none!important;
+          none !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
       }
 
 
-      /* ===================================================
+      /* =====================================================
          CONTACT INFORMATION
-         =================================================== */
+         ===================================================== */
 
-      .pdf-owner-contact{
+      .pdf-owner-contact {
 
         width:
-          100%!important;
+          100% !important;
 
         box-sizing:
-          border-box!important;
+          border-box !important;
 
         padding:
-          5px 30px!important;
+          5px 30px !important;
 
         margin:
-          0!important;
+          0 !important;
 
         background:
-          #10233f!important;
+          #10233f !important;
 
         color:
-          #fff!important;
+          #ffffff !important;
 
         border:
-          0!important;
+          0 !important;
 
         border-radius:
-          0!important;
+          0 !important;
 
         line-height:
-          1!important;
+          1 !important;
 
       }
 
 
-      .pdf-owner-title{
+      .pdf-owner-title {
 
         display:
-          inline-block!important;
+          inline-block !important;
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
         font-weight:
-          700!important;
+          700 !important;
 
         letter-spacing:
-          .6px!important;
+          .6px !important;
 
         margin-right:
-          10px!important;
+          10px !important;
 
       }
 
 
-      .pdf-owner-inline{
+      .pdf-owner-inline {
 
         display:
-          inline-flex!important;
+          inline-flex !important;
 
         align-items:
-          center!important;
+          center !important;
 
         gap:
-          12px!important;
+          12px !important;
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
       }
 
 
-      .pdf-owner-inline span{
+      .pdf-owner-inline span {
 
         white-space:
-          nowrap!important;
+          nowrap !important;
 
       }
 
 
-      .pdf-owner-inline i{
+      .pdf-owner-inline i {
 
         margin-right:
-          2px!important;
+          2px !important;
 
       }
 
 
-      /* ===================================================
+      /* =====================================================
          FOOTER
-         =================================================== */
+         ===================================================== */
 
       .pdf-export-mode footer,
-      .pdf-export-mode .footer{
+      .pdf-export-mode .footer {
 
         display:
-          block!important;
+          block !important;
 
         width:
-          100%!important;
+          100% !important;
 
         height:
-          auto!important;
+          auto !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         max-height:
-          none!important;
+          none !important;
 
         margin:
-          0!important;
+          0 !important;
 
         padding:
-          6px 30px!important;
+          6px 30px !important;
 
         box-sizing:
-          border-box!important;
+          border-box !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
         page-break-inside:
-          avoid!important;
+          avoid !important;
 
       }
 
 
       .pdf-export-mode footer *,
-      .pdf-export-mode .footer *{
+      .pdf-export-mode .footer * {
 
         animation:
-          none!important;
+          none !important;
 
         transition:
-          none!important;
-
-        transform:
-          none!important;
-
-        max-height:
-          none!important;
+          none !important;
 
       }
 
 
       .pdf-export-mode footer p,
-      .pdf-export-mode .footer p{
+      .pdf-export-mode .footer p {
 
         margin:
-          0!important;
+          0 !important;
 
         font-size:
-          7px!important;
+          7px !important;
 
         line-height:
-          1.25!important;
+          1.25 !important;
 
       }
 
 
       .pdf-export-mode footer small,
-      .pdf-export-mode .footer small{
+      .pdf-export-mode .footer small {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
         line-height:
-          1.2!important;
+          1.2 !important;
 
       }
 
@@ -1175,32 +1274,53 @@ document.addEventListener("DOMContentLoaded", () => {
       .pdf-export-mode .footer h3,
       .pdf-export-mode .footer h4,
       .pdf-export-mode .footer h5,
-      .pdf-export-mode .footer h6{
+      .pdf-export-mode .footer h6 {
 
         margin:
-          0!important;
+          0 !important;
 
       }
 
 
-      /* ===================================================
-         CEGAH ELEMEN TIDAK TERLIHAT KARENA HEIGHT FIXED
-         =================================================== */
+      /* =====================================================
+         GAMBAR
+         ===================================================== */
 
-      .pdf-export-mode .row,
-      .pdf-export-mode .col,
-      .pdf-export-mode [class*="col-"]{
-
-        min-height:
-          0!important;
-
-      }
-
-
-      .pdf-export-mode img{
+      .pdf-export-mode img {
 
         max-width:
-          100%!important;
+          100% !important;
+
+        height:
+          auto !important;
+
+        box-sizing:
+          border-box !important;
+
+      }
+
+
+      /* =====================================================
+         JANGAN BIARKAN GAMBAR MENJADI TERDISTORSI
+         ===================================================== */
+
+      .pdf-export-mode img,
+      .pdf-export-mode svg {
+
+        transform-origin:
+          center center !important;
+
+      }
+
+
+      /* =====================================================
+         LINK
+         ===================================================== */
+
+      .pdf-export-mode a {
+
+        text-decoration:
+          none !important;
 
       }
 
@@ -1213,7 +1333,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // HOLDER DI LUAR VIEWPORT
+    // HOLDER DI LUAR LAYAR
     // =======================================================
 
     const holder =
@@ -1232,13 +1352,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "0";
 
     holder.style.width =
-      "800px";
+      `${BASE_WIDTH}px`;
 
     holder.style.height =
       "auto";
 
     holder.style.background =
-      "#fff";
+      "#ffffff";
 
     holder.style.padding =
       "0";
@@ -1266,101 +1386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
 
       // =====================================================
-      // TUNGGU LAYOUT
-      // =====================================================
-
-      await new Promise(
-        resolve => {
-
-          requestAnimationFrame(
-            () => {
-
-              requestAnimationFrame(
-                resolve
-              );
-
-            }
-          );
-
-        }
-      );
-
-
-      // =====================================================
-      // TUNGGU FONT
-      // =====================================================
-
-      if (
-        document.fonts &&
-        document.fonts.ready
-      ) {
-
-        await document.fonts.ready;
-
-      }
-
-
-      // =====================================================
-      // TUNGGU GAMBAR
-      // =====================================================
-
-      await Promise.all(
-
-        Array.from(
-          clone.querySelectorAll(
-            "img"
-          )
-        ).map(
-          img => {
-
-            if (
-              img.complete
-            ) {
-
-              return Promise.resolve();
-
-            }
-
-            return new Promise(
-              resolve => {
-
-                img.onload =
-                  resolve;
-
-                img.onerror =
-                  resolve;
-
-              }
-            );
-
-          }
-        )
-
-      );
-
-
-      // =====================================================
-      // AUTO-FIT F4 PRESISI
-      //
-      // Mencari ukuran render yang:
-      // - tidak melebihi tinggi area F4
-      // - mempertahankan proporsi
-      // - paling mendekati rasio area cetak
-      // - meminimalkan space kosong
-      // =====================================================
-
-      let bestWidth =
-        800;
-
-      let bestHeight =
-        Infinity;
-
-      let bestScore =
-        Infinity;
-
-
-      // =====================================================
-      // FUNGSI TUNGGU LAYOUT
+      // WAIT LAYOUT
       // =====================================================
 
       async function waitForLayout() {
@@ -1385,25 +1411,107 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // FUNGSI UKUR
+      // WAIT FONT
       // =====================================================
 
-      async function measureWidth(
-        width
+      if (
+        document.fonts &&
+        document.fonts.ready
       ) {
 
+        await document.fonts.ready;
+
+      }
+
+
+      // =====================================================
+      // WAIT GAMBAR
+      // =====================================================
+
+      await Promise.all(
+
+        Array.from(
+          clone.querySelectorAll(
+            "img"
+          )
+        ).map(
+          img => {
+
+            if (
+              img.complete
+            ) {
+
+              return Promise.resolve();
+
+            }
+
+
+            return new Promise(
+              resolve => {
+
+                img.onload =
+                  resolve;
+
+                img.onerror =
+                  resolve;
+
+              }
+            );
+
+          }
+        )
+
+      );
+
+
+      // =====================================================
+      // FUNGSI UKUR PDF
+      // =====================================================
+
+      async function measureScale(
+        scale
+      ) {
+
+        /*
+         * Teknik ini sangat penting.
+         *
+         * Layout dibuat lebih lebar ketika scale diperkecil,
+         * lalu seluruh layout di-scale secara UNIFORM.
+         *
+         * Hasilnya:
+         * - lebar tetap memenuhi area cetak
+         * - tinggi dapat dipadatkan
+         * - foto tidak gepeng
+         * - foto tidak dipotong
+         */
+
+        const layoutWidth =
+          BASE_WIDTH /
+          scale;
+
+
         clone.style.setProperty(
-          "--pdf-render-width",
-          `${width}px`
+          "--pdf-layout-width",
+          `${layoutWidth}px`
         );
 
+
+        clone.style.setProperty(
+          "--pdf-scale",
+          scale
+        );
+
+
         holder.style.width =
-          `${width}px`;
+          `${layoutWidth}px`;
+
 
         await waitForLayout();
 
+
         const rect =
           clone.getBoundingClientRect();
+
 
         return {
 
@@ -1411,14 +1519,7 @@ document.addEventListener("DOMContentLoaded", () => {
             rect.width,
 
           height:
-            rect.height,
-
-          aspect:
-            rect.height /
-            Math.max(
-              1,
-              rect.width
-            )
+            rect.height
 
         };
 
@@ -1426,152 +1527,85 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // EVALUASI WIDTH
+      // TARGET RASIO AREA CETAK F4
       // =====================================================
 
-      async function evaluateWidth(
-        width
-      ) {
-
-        const result =
-          await measureWidth(
-            width
-          );
-
-
-        // Tidak boleh melebihi area F4
-        if (
-          result.height >
-          usableHeightPx
-        ) {
-
-          return;
-
-        }
-
-
-        const aspectDifference =
-          Math.abs(
-            Math.log(
-              result.aspect /
-              targetAspect
-            )
-          );
-
-
-        /*
-         * Semakin dekat rasio dengan area F4,
-         * semakin kecil score.
-         */
-
-        const score =
-          aspectDifference +
-          (
-            0.000001 /
-            Math.max(
-              1,
-              result.width
-            )
-          );
-
-
-        if (
-          score <
-          bestScore
-        ) {
-
-          bestScore =
-            score;
-
-          bestWidth =
-            width;
-
-          bestHeight =
-            result.height;
-
-        }
-
-      }
+      const targetRatio =
+        usableHeight /
+        usableWidth;
 
 
       // =====================================================
-      // CANDIDATE WIDTH
-      // =====================================================
-
-      const candidates = [];
-
-
-      for (
-        let width = 350;
-        width <= 1200;
-        width += 25
-      ) {
-
-        candidates.push(
-          width
-        );
-
-      }
-
-
-      candidates.push(
-        400,
-        450,
-        500,
-        550,
-        600,
-        650,
-        700,
-        750,
-        800,
-        850,
-        900,
-        950,
-        1000,
-        1050,
-        1100,
-        1150,
-        1200
-      );
-
-
-      for (
-        const width of
-        candidates
-      ) {
-
-        await evaluateWidth(
-          width
-        );
-
-      }
-
-
-      // =====================================================
-      // FALLBACK
+      // CARI SCALE TERBAIK
       //
-      // Jika seluruh kandidat terlalu tinggi,
-      // cari ukuran yang pasti muat.
+      // Tujuannya:
+      //
+      // width  = area cetak F4
+      // height = sedekat mungkin dengan area cetak F4
+      //
+      // tanpa memotong isi.
       // =====================================================
+
+      let bestScale =
+        1;
+
+      let bestResult =
+        null;
+
+
+      // =====================================================
+      // CEK SCALE NORMAL
+      // =====================================================
+
+      const normal =
+        await measureScale(
+          1
+        );
+
+
+      // =====================================================
+      // SCALE MINIMUM / MAXIMUM
+      // =====================================================
+
+      let low =
+        0.45;
+
+      let high =
+        1.0;
+
+
+      /*
+       * Karena semakin kecil scale
+       * biasanya membuat tinggi semakin kecil,
+       * kita cari scale terbesar yang masih muat.
+       */
 
       if (
-        bestHeight ===
-        Infinity
+        normal.height <=
+        (
+          BASE_WIDTH *
+          targetRatio
+        )
       ) {
 
-        let low =
-          250;
+        bestScale =
+          1;
 
-        let high =
-          1200;
+        bestResult =
+          normal;
 
-        let fallbackWidth =
-          low;
+      }
 
+
+      else {
+
+        // ===================================================
+        // BINARY SEARCH
+        // ===================================================
 
         for (
           let i = 0;
-          i < 18;
+          i < 25;
           i++
         ) {
 
@@ -1583,18 +1617,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
           const result =
-            await measureWidth(
+            await measureScale(
               mid
             );
 
 
+          const targetHeight =
+            BASE_WIDTH *
+            targetRatio;
+
+
           if (
             result.height <=
-            usableHeightPx
+            targetHeight
           ) {
 
-            fallbackWidth =
+            /*
+             * Sudah muat.
+             * Coba scale lebih besar supaya
+             * tulisan/foto tetap maksimal.
+             */
+
+            bestScale =
               mid;
+
+            bestResult =
+              result;
 
             low =
               mid;
@@ -1603,6 +1651,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
           else {
 
+            /*
+             * Masih terlalu tinggi.
+             * Turunkan scale.
+             */
+
             high =
               mid;
 
@@ -1610,53 +1663,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+      }
 
-        const fallback =
-          await measureWidth(
-            fallbackWidth
+
+      // =====================================================
+      // FALLBACK JIKA MASIH BELUM ADA
+      // =====================================================
+
+      if (
+        !bestResult
+      ) {
+
+        bestScale =
+          0.45;
+
+        bestResult =
+          await measureScale(
+            bestScale
           );
-
-
-        bestWidth =
-          fallback.width;
-
-        bestHeight =
-          fallback.height;
 
       }
 
 
       // =====================================================
-      // WIDTH FINAL
+      // TERAPKAN SCALE FINAL
       // =====================================================
 
-      clone.style.setProperty(
-        "--pdf-render-width",
-        `${bestWidth}px`
-      );
-
-
-      holder.style.width =
-        `${bestWidth}px`;
-
-
-      await waitForLayout();
-
-
-      // =====================================================
-      // UKUR FINAL
-      // =====================================================
-
-      const finalRect =
-        clone.getBoundingClientRect();
+      const finalResult =
+        await measureScale(
+          bestScale
+        );
 
 
       const finalWidth =
-        finalRect.width;
+        finalResult.width;
 
 
       const finalHeight =
-        finalRect.height;
+        finalResult.height;
 
 
       // =====================================================
@@ -1668,8 +1712,13 @@ document.addEventListener("DOMContentLoaded", () => {
           clone,
           {
 
+            /*
+             * Scale 3 membuat hasil print
+             * lebih tajam dibanding scale 2.
+             */
+
             scale:
-              2,
+              3,
 
             useCORS:
               true,
@@ -1685,12 +1734,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             windowWidth:
               Math.ceil(
-                finalWidth
+                BASE_WIDTH /
+                bestScale
               ),
 
             windowHeight:
               Math.ceil(
-                finalHeight
+                finalHeight /
+                bestScale
               ),
 
             imageTimeout:
@@ -1700,7 +1751,10 @@ document.addEventListener("DOMContentLoaded", () => {
               0,
 
             scrollY:
-              0
+              0,
+
+            removeContainer:
+              true
 
           }
         );
@@ -1734,7 +1788,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // RASIO CANVAS
+      // HITUNG RASIO CANVAS
       // =====================================================
 
       const imageRatio =
@@ -1743,7 +1797,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // FIT KE AREA CETAK F4
+      // LEBAR SELALU MEMENUHI AREA CETAK
       // =====================================================
 
       let renderWidth =
@@ -1756,8 +1810,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // JIKA TERLALU TINGGI
-      // FIT KE TINGGI
+      // JIKA MASIH TERLALU TINGGI
+      //
+      // Ini hanya pengaman terakhir.
+      // Normalnya tidak digunakan karena scale
+      // sudah dicari sebelumnya.
       // =====================================================
 
       if (
@@ -1765,56 +1822,24 @@ document.addEventListener("DOMContentLoaded", () => {
         usableHeight
       ) {
 
-        renderHeight =
-          usableHeight;
-
-        renderWidth =
-          renderHeight /
-          imageRatio;
-
-      }
+        const safetyRatio =
+          usableHeight /
+          renderHeight;
 
 
-      // =====================================================
-      // PENGAMAN LEBAR
-      // =====================================================
+        renderWidth *=
+          safetyRatio;
 
-      if (
-        renderWidth >
-        usableWidth
-      ) {
-
-        renderWidth =
-          usableWidth;
-
-        renderHeight =
-          renderWidth *
-          imageRatio;
-
-      }
-
-
-      // =====================================================
-      // PENGAMAN TINGGI
-      // =====================================================
-
-      if (
-        renderHeight >
-        usableHeight
-      ) {
 
         renderHeight =
           usableHeight;
 
-        renderWidth =
-          renderHeight /
-          imageRatio;
-
       }
 
 
       // =====================================================
-      // POSISI HORIZONTAL SIMETRIS
+      // POSISI HORIZONTAL
+      // SIMETRIS
       // =====================================================
 
       const x =
@@ -1826,33 +1851,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // POSISI VERTIKAL SIMETRIS
-      //
-      // Space yang tersisa dibagi rata antara
-      // bagian atas dan bawah.
+      // POSISI VERTIKAL
+      // SIMETRIS
       // =====================================================
 
       const y =
         marginTop +
-        Math.max(
-          0,
-          (
-            usableHeight -
-            renderHeight
-          ) / 2
+        (
+          usableHeight -
+          renderHeight
+        ) / 2;
+
+
+      // =====================================================
+      // DATA IMAGE
+      // =====================================================
+
+      const imageData =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.95
         );
 
 
       // =====================================================
-      // TAMBAHKAN GAMBAR KE PDF
+      // MASUKKAN KE PDF
       // =====================================================
 
       pdf.addImage(
 
-        canvas.toDataURL(
-          "image/jpeg",
-          0.92
-        ),
+        imageData,
 
         "JPEG",
 
@@ -1866,9 +1894,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         undefined,
 
-        "MEDIUM"
+        "FAST"
 
       );
+
+
+      // =====================================================
+      // GARIS BATAS AREA CETAK
+      //
+      // TIDAK DITAMPILKAN.
+      // Hanya perhitungan posisi.
+      // =====================================================
 
 
       // =====================================================
@@ -1894,7 +1930,7 @@ document.addEventListener("DOMContentLoaded", () => {
     finally {
 
       // =====================================================
-      // BERSIHKAN HOLDER
+      // BERSIHKAN CLONE
       // WEBSITE ASLI TETAP UTUH
       // =====================================================
 
@@ -1906,7 +1942,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================================
-  // TOMBOL REQUEST CV
+  // TOMBOL DOWNLOAD CV
   // =========================================================
 
   if (
@@ -1956,10 +1992,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         try {
 
-          // -------------------------------------------------
-          // GENERATE PDF
-          // -------------------------------------------------
-
           await generatePortfolioPDF();
 
         }
@@ -1992,7 +2024,7 @@ document.addEventListener("DOMContentLoaded", () => {
         finally {
 
           // -------------------------------------------------
-          // KEMBALIKAN TOMBOL
+          // KEMBALIKAN BUTTON
           // -------------------------------------------------
 
           downloadCVBtn.classList.remove(
@@ -2620,10 +2652,6 @@ document.addEventListener("DOMContentLoaded", () => {
           "click",
           () => {
 
-            // ---------------------------------------------
-            // HAPUS ACTIVE ITEM LAIN
-            // ---------------------------------------------
-
             experienceItems.forEach(
               el => {
 
@@ -2635,18 +2663,10 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-            // ---------------------------------------------
-            // ACTIVE ITEM
-            // ---------------------------------------------
-
             item.classList.add(
               "is-active"
             );
 
-
-            // ---------------------------------------------
-            // TITLE
-            // ---------------------------------------------
 
             if (
               title
@@ -2658,10 +2678,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
-
-            // ---------------------------------------------
-            // PERIOD
-            // ---------------------------------------------
 
             if (
               period
@@ -2676,10 +2692,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            // ---------------------------------------------
-            // DESCRIPTION
-            // ---------------------------------------------
-
             if (
               description
             ) {
@@ -2690,10 +2702,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
-
-            // ---------------------------------------------
-            // TAMPILKAN MODAL
-            // ---------------------------------------------
 
             modal.show();
 
