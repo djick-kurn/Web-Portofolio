@@ -33,10 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const div =
       document.createElement("div");
 
-
     div.textContent =
       value;
-
 
     return div.innerHTML;
 
@@ -45,9 +43,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // =========================================================
-  // GENERATE PDF - F4 1 HALAMAN
-  // FOOTER TETAP TAMPIL
-  // SEMUA KONTEN HARUS MUAT
+  // GENERATE PDF
+  //
+  // F4 PORTRAIT
+  // 215 x 330 mm
+  //
+  // 1 HALAMAN
+  // FULL PAGE
+  // FOOTER TIDAK TERPOTONG
+  // SEMUA KONTEN TETAP
   // =========================================================
 
   async function generatePortfolioPDF() {
@@ -85,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // UKURAN F4 / FOLIO INDONESIA
+    // UKURAN F4
     // =======================================================
 
     const pageWidth =
@@ -101,14 +105,13 @@ document.addEventListener("DOMContentLoaded", () => {
     // =======================================================
 
     const marginX =
-      5;
+      3;
 
     const marginTop =
-      5;
+      3;
 
     const marginBottom =
-      5;
-
+      3;
 
 
     const usableWidth =
@@ -124,7 +127,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
+    // KONVERSI MM -> PX
+    //
+    // 96 CSS pixel = 25.4 mm
+    // =======================================================
+
+    const PX_PER_MM =
+      96 / 25.4;
+
+
+    const pdfRenderWidth =
+      Math.round(
+        usableWidth *
+        PX_PER_MM
+      );
+
+
+    /*
+     * JANGAN lagi langsung menentukan
+     * tinggi render berdasarkan F4.
+     *
+     * Tinggi sebenarnya akan dihitung
+     * setelah clone selesai dibuat.
+     */
+
+
+
+    // =======================================================
     // CLONE KHUSUS PDF
+    //
     // WEBSITE ASLI TIDAK DIUBAH
     // =======================================================
 
@@ -139,10 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // JANGAN HAPUS FOOTER
-    //
-    // FOOTER SEKARANG MEMANG AKAN DIMASUKKAN
-    // KE DALAM PDF.
+    // HAPUS TOMBOL YANG TIDAK DIPERLUKAN DI PDF
     // =======================================================
 
     clone.querySelectorAll(
@@ -154,8 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =======================================================
-    // PENGALAMAN
-    // PERTAHANKAN SEMUA
+    // PENGALAMAN KERJA
+    //
+    // SEMUA EXPERIENCE TETAP MASUK
+    // MODAL TIDAK DIPERLUKAN DALAM PDF
     // =======================================================
 
     clone.querySelectorAll(
@@ -208,6 +238,10 @@ document.addEventListener("DOMContentLoaded", () => {
           "none";
 
 
+        replacement.style.overflow =
+          "visible";
+
+
         el.replaceWith(
           replacement
         );
@@ -219,7 +253,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // =======================================================
     // CAROUSEL
-    // SEMUA TESTIMONIAL TETAP MASUK
+    //
+    // SEMUA TESTIMONIAL DITAMPILKAN
     // =======================================================
 
     clone.querySelectorAll(
@@ -266,7 +301,11 @@ document.addEventListener("DOMContentLoaded", () => {
           );
 
 
-        if (!inner) return;
+        if (!inner) {
+
+          return;
+
+        }
 
 
         inner.style.cssText +=
@@ -313,7 +352,7 @@ document.addEventListener("DOMContentLoaded", () => {
               "height:auto!important;" +
               "min-height:0!important;" +
               "max-height:none!important;" +
-              "margin:0 0 3px 0!important;" +
+              "margin:0 0 2px 0!important;" +
               "padding:0!important;" +
               "opacity:1!important;" +
               "visibility:visible!important;" +
@@ -427,7 +466,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <span>
           <i class="fa-regular fa-calendar"></i>
-
           ${new Date().toLocaleDateString(
             "id-ID",
             {
@@ -441,7 +479,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "numeric"
             }
           )}
-
         </span>
 
       </div>
@@ -469,79 +506,82 @@ document.addEventListener("DOMContentLoaded", () => {
     pdfStyle.textContent = `
 
       /* ===================================================
-         RESET UTAMA PDF
+         RESET UTAMA
          =================================================== */
 
-      .pdf-export-mode{
+      .pdf-export-mode {
 
         width:
-          var(--pdf-render-width,800px)!important;
-
-        max-width:
-          var(--pdf-render-width,800px)!important;
+          ${pdfRenderWidth}px !important;
 
         min-width:
-          var(--pdf-render-width,800px)!important;
+          ${pdfRenderWidth}px !important;
+
+        max-width:
+          ${pdfRenderWidth}px !important;
 
         height:
-          auto!important;
+          auto !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         max-height:
-          none!important;
+          none !important;
 
         margin:
-          0!important;
+          0 !important;
 
         padding:
-          0!important;
-
-        overflow:
-          visible!important;
-
-        border-radius:
-          0!important;
-
-        box-shadow:
-          none!important;
-
-        border:
-          0!important;
-
-        background:
-          #fff!important;
+          0 !important;
 
         box-sizing:
-          border-box!important;
+          border-box !important;
+
+        overflow:
+          visible !important;
+
+        background:
+          #ffffff !important;
+
+        border:
+          0 !important;
+
+        border-radius:
+          0 !important;
+
+        box-shadow:
+          none !important;
 
         transform:
-          none!important;
+          none !important;
 
-        page-break-inside:
-          avoid!important;
+        display:
+          block !important;
+
+        position:
+          relative !important;
 
       }
 
 
 
       /* ===================================================
-         HENTIKAN SEMUA ANIMASI
+         MATIKAN ANIMASI
          =================================================== */
 
       .pdf-export-mode *,
       .pdf-export-mode *::before,
-      .pdf-export-mode *::after{
+      .pdf-export-mode *::after {
 
         animation:
-          none!important;
+          none !important;
 
         transition:
-          none!important;
+          none !important;
 
         transform:
-          none!important;
+          none !important;
 
       }
 
@@ -551,97 +591,90 @@ document.addEventListener("DOMContentLoaded", () => {
          HERO
          =================================================== */
 
-      .pdf-export-mode .hero{
+      .pdf-export-mode .hero {
 
         padding:
-          12px 30px 13px!important;
+          10px 24px 11px !important;
 
         margin:
-          0!important;
+          0 !important;
 
       }
 
 
-
-      .pdf-export-mode .topbar{
+      .pdf-export-mode .topbar {
 
         margin-bottom:
-          11px!important;
+          8px !important;
 
       }
 
 
-
-      .pdf-export-mode .hero-grid{
+      .pdf-export-mode .hero-grid {
 
         grid-template-columns:
-          115px 1fr!important;
+          105px 1fr !important;
 
         gap:
-          20px!important;
+          16px !important;
 
       }
 
 
-
-      .pdf-export-mode .profile-ring{
+      .pdf-export-mode .profile-ring {
 
         width:
-          100px!important;
+          90px !important;
 
         height:
-          100px!important;
+          90px !important;
 
         padding:
-          4px!important;
+          4px !important;
 
       }
 
 
-
-      .pdf-export-mode .availability{
+      .pdf-export-mode .availability {
 
         margin-top:
-          4px!important;
+          3px !important;
 
         font-size:
-          7px!important;
+          6.5px !important;
 
       }
 
 
-
-      .pdf-export-mode .hero h1{
+      .pdf-export-mode .hero h1 {
 
         font-size:
-          35px!important;
+          32px !important;
 
         line-height:
-          1!important;
+          1 !important;
 
         margin-bottom:
-          3px!important;
+          3px !important;
 
       }
 
 
-
-      .pdf-export-mode .lead{
+      .pdf-export-mode .lead {
 
         font-size:
-          9px!important;
+          8.5px !important;
 
         line-height:
-          1.3!important;
+          1.25 !important;
 
       }
 
 
-
-      .pdf-export-mode .hero-actions{
+      .pdf-export-mode .hero-actions {
 
         display:
-          none!important;
+          none !important;
 
       }
 
@@ -651,13 +684,19 @@ document.addEventListener("DOMContentLoaded", () => {
          CONTENT
          =================================================== */
 
-      .pdf-export-mode .content{
+      .pdf-export-mode .content {
 
         padding:
-          0 30px 0!important;
+          0 24px !important;
 
         margin:
-          0!important;
+          0 !important;
+
+        box-sizing:
+          border-box !important;
+
+        min-height:
+          0 !important;
 
       }
 
@@ -667,58 +706,55 @@ document.addEventListener("DOMContentLoaded", () => {
          SECTION
          =================================================== */
 
-      .pdf-export-mode .section{
+      .pdf-export-mode .section {
 
         padding:
-          7px 0!important;
+          6px 0 !important;
 
         margin:
-          0!important;
+          0 !important;
 
         border-bottom:
-          1px solid #e4e7ec!important;
+          1px solid #e4e7ec !important;
 
         page-break-inside:
-          avoid!important;
+          avoid !important;
 
       }
 
 
-
-      .pdf-export-mode .section-heading{
+      .pdf-export-mode .section-heading {
 
         margin-bottom:
-          5px!important;
+          4px !important;
 
         gap:
-          7px!important;
+          6px !important;
 
       }
 
 
-
-      .pdf-export-mode .section h2{
+      .pdf-export-mode .section h2 {
 
         font-size:
-          17px!important;
+          16px !important;
 
         line-height:
-          1.05!important;
+          1.05 !important;
 
       }
 
 
-
-      .pdf-export-mode .section-intro{
+      .pdf-export-mode .section-intro {
 
         font-size:
-          7.5px!important;
+          7px !important;
 
         margin-top:
-          -2px!important;
+          -1px !important;
 
         margin-bottom:
-          5px!important;
+          4px !important;
 
       }
 
@@ -728,76 +764,71 @@ document.addEventListener("DOMContentLoaded", () => {
          SKILLS
          =================================================== */
 
-      .pdf-export-mode .skills-grid{
+      .pdf-export-mode .skills-grid {
 
         gap:
-          3px!important;
+          3px !important;
 
       }
 
 
-
-      .pdf-export-mode .skill-card{
+      .pdf-export-mode .skill-card {
 
         grid-template-columns:
-          22px 1fr!important;
+          21px 1fr !important;
 
         gap:
-          5px!important;
+          5px !important;
 
         padding:
-          4px 6px!important;
+          4px 6px !important;
 
         border-radius:
-          5px!important;
+          5px !important;
 
       }
 
 
-
-      .pdf-export-mode .skill-icon{
+      .pdf-export-mode .skill-icon {
 
         width:
-          22px!important;
+          21px !important;
 
         height:
-          22px!important;
+          21px !important;
 
         border-radius:
-          4px!important;
+          4px !important;
 
         font-size:
-          8px!important;
+          8px !important;
 
       }
 
 
-
-      .pdf-export-mode .skill-card strong{
+      .pdf-export-mode .skill-card strong {
 
         font-size:
-          7.5px!important;
+          7.5px !important;
 
       }
 
 
-
-      .pdf-export-mode .skill-card small{
+      .pdf-export-mode .skill-card small {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
       }
 
 
-
-      .pdf-export-mode .skill-track{
+      .pdf-export-mode .skill-track {
 
         height:
-          3px!important;
+          3px !important;
 
         margin-top:
-          2px!important;
+          2px !important;
 
       }
 
@@ -808,89 +839,84 @@ document.addEventListener("DOMContentLoaded", () => {
          =================================================== */
 
       .pdf-export-mode .experience-item,
-      .pdf-export-mode .pdf-experience-static{
+      .pdf-export-mode .pdf-experience-static {
 
         grid-template-columns:
-          12px 1fr auto!important;
+          12px 1fr auto !important;
 
         gap:
-          6px!important;
+          6px !important;
 
         padding:
-          3px 2px 3px 0!important;
+          3px 2px 3px 0 !important;
 
         margin:
-          0!important;
+          0 !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         height:
-          auto!important;
+          auto !important;
 
         max-height:
-          none!important;
+          none !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
         page-break-inside:
-          avoid!important;
+          avoid !important;
 
       }
 
 
-
-      .pdf-export-mode .timeline-dot{
+      .pdf-export-mode .timeline-dot {
 
         width:
-          7px!important;
+          7px !important;
 
         height:
-          7px!important;
+          7px !important;
 
       }
 
 
-
-      .pdf-export-mode .experience-main{
+      .pdf-export-mode .experience-main {
 
         gap:
-          1px!important;
+          1px !important;
 
       }
 
 
-
-      .pdf-export-mode .experience-main strong{
+      .pdf-export-mode .experience-main strong {
 
         font-size:
-          8px!important;
+          8px !important;
 
         line-height:
-          1.15!important;
+          1.15 !important;
 
       }
-
 
 
       .pdf-export-mode .experience-main small,
-      .pdf-export-mode .experience-period{
+      .pdf-export-mode .experience-period {
 
         font-size:
-          7px!important;
+          7px !important;
 
         line-height:
-          1.15!important;
+          1.15 !important;
 
       }
 
 
-
-      .pdf-export-mode .experience-period i{
+      .pdf-export-mode .experience-period i {
 
         font-size:
-          6px!important;
+          6px !important;
 
       }
 
@@ -900,10 +926,10 @@ document.addEventListener("DOMContentLoaded", () => {
          SPLIT SECTION
          =================================================== */
 
-      .pdf-export-mode .split-section{
+      .pdf-export-mode .split-section {
 
         gap:
-          14px!important;
+          12px !important;
 
       }
 
@@ -913,35 +939,33 @@ document.addEventListener("DOMContentLoaded", () => {
          ORGANISASI
          =================================================== */
 
-      .pdf-export-mode .org-list div{
+      .pdf-export-mode .org-list div {
 
         padding:
-          3px 0!important;
+          3px 0 !important;
 
         grid-template-columns:
-          minmax(0,1fr) 110px!important;
+          minmax(0,1fr) 110px !important;
 
         gap:
-          1px 6px!important;
+          1px 6px !important;
 
       }
-
 
 
       .pdf-export-mode .org-list span,
-      .pdf-export-mode .org-list small{
+      .pdf-export-mode .org-list small {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
       }
 
 
-
-      .pdf-export-mode .org-list strong{
+      .pdf-export-mode .org-list strong {
 
         font-size:
-          7px!important;
+          7px !important;
 
       }
 
@@ -951,100 +975,96 @@ document.addEventListener("DOMContentLoaded", () => {
          TESTIMONIAL
          =================================================== */
 
-      .pdf-export-mode .testimonial-box{
+      .pdf-export-mode .testimonial-box {
 
         padding:
-          6px 8px 5px!important;
+          6px 8px 5px !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         height:
-          auto!important;
+          auto !important;
 
         max-height:
-          none!important;
+          none !important;
 
         border-radius:
-          6px!important;
+          6px !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
         page-break-inside:
-          avoid!important;
+          avoid !important;
 
       }
 
 
-
-      .pdf-export-mode .testimonial-box p{
+      .pdf-export-mode .testimonial-box p {
 
         font-size:
-          8px!important;
+          8px !important;
 
         line-height:
-          1.2!important;
+          1.2 !important;
 
         margin:
-          2px 0 3px!important;
+          2px 0 3px !important;
 
       }
 
 
-
-      .pdf-export-mode .testimonial-box span{
+      .pdf-export-mode .testimonial-box span {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
       }
 
 
-
-      .pdf-export-mode .pdf-carousel-label{
+      .pdf-export-mode .pdf-carousel-label {
 
         display:
-          block!important;
+          block !important;
 
         font-size:
-          6px!important;
+          6px !important;
 
         line-height:
-          1.1!important;
+          1.1 !important;
 
         font-weight:
-          700!important;
+          700 !important;
 
         letter-spacing:
-          .35px!important;
+          .35px !important;
 
         opacity:
-          .6!important;
+          .6 !important;
 
         margin:
-          0 0 2px!important;
+          0 0 2px !important;
 
       }
 
 
-
-      .pdf-export-mode .carousel-item{
+      .pdf-export-mode .carousel-item {
 
         margin-bottom:
-          2px!important;
+          2px !important;
 
         height:
-          auto!important;
+          auto !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         max-height:
-          none!important;
+          none !important;
 
         overflow:
-          visible!important;
+          visible !important;
 
       }
 
@@ -1054,91 +1074,87 @@ document.addEventListener("DOMContentLoaded", () => {
          CONTACT INFORMATION
          =================================================== */
 
-      .pdf-owner-contact{
+      .pdf-owner-contact {
 
         width:
-          100%!important;
+          100% !important;
 
         box-sizing:
-          border-box!important;
+          border-box !important;
 
         padding:
-          5px 30px!important;
+          5px 24px !important;
 
         margin:
-          0!important;
+          0 !important;
 
         background:
-          #10233f!important;
+          #10233f !important;
 
         color:
-          #fff!important;
+          #ffffff !important;
 
         border:
-          0!important;
+          0 !important;
 
         border-radius:
-          0!important;
+          0 !important;
 
         line-height:
-          1!important;
+          1 !important;
 
       }
 
 
-
-      .pdf-owner-title{
+      .pdf-owner-title {
 
         display:
-          inline-block!important;
+          inline-block !important;
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
         font-weight:
-          700!important;
+          700 !important;
 
         letter-spacing:
-          .6px!important;
+          .6px !important;
 
         margin-right:
-          10px!important;
+          10px !important;
 
       }
 
 
-
-      .pdf-owner-inline{
+      .pdf-owner-inline {
 
         display:
-          inline-flex!important;
+          inline-flex !important;
 
         align-items:
-          center!important;
+          center !important;
 
         gap:
-          12px!important;
+          12px !important;
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
       }
 
 
-
-      .pdf-owner-inline span{
+      .pdf-owner-inline span {
 
         white-space:
-          nowrap!important;
+          nowrap !important;
 
       }
 
 
-
-      .pdf-owner-inline i{
+      .pdf-owner-inline i {
 
         margin-right:
-          2px!important;
+          2px !important;
 
       }
 
@@ -1146,99 +1162,93 @@ document.addEventListener("DOMContentLoaded", () => {
 
       /* ===================================================
          FOOTER
-         ===================================================
-         
-         FOOTER TIDAK DIHAPUS.
-         Dibuat compact agar tetap muat F4.
          =================================================== */
 
       .pdf-export-mode footer,
-      .pdf-export-mode .footer{
+      .pdf-export-mode .footer {
 
         display:
-          block!important;
+          block !important;
 
         width:
-          100%!important;
+          100% !important;
 
         height:
-          auto!important;
+          auto !important;
 
         min-height:
-          0!important;
+          0 !important;
 
         max-height:
-          none!important;
+          none !important;
 
         margin:
-          0!important;
+          0 !important;
 
         padding:
-          6px 30px!important;
+          6px 24px !important;
 
         box-sizing:
-          border-box!important;
+          border-box !important;
 
         overflow:
-          visible!important;
+          visible !important;
+
+        position:
+          relative !important;
 
         page-break-inside:
-          avoid!important;
+          avoid !important;
+
+        break-inside:
+          avoid !important;
 
       }
-
 
 
       .pdf-export-mode footer *,
-      .pdf-export-mode .footer *{
+      .pdf-export-mode .footer * {
 
         animation:
-          none!important;
+          none !important;
 
         transition:
-          none!important;
+          none !important;
 
         transform:
-          none!important;
+          none !important;
 
         max-height:
-          none!important;
+          none !important;
 
       }
 
-
-
-      /* ===================================================
-         FOOTER TEXT
-         =================================================== */
 
       .pdf-export-mode footer p,
-      .pdf-export-mode .footer p{
+      .pdf-export-mode .footer p {
 
         margin:
-          0!important;
+          0 !important;
 
         font-size:
-          7px!important;
+          7px !important;
 
         line-height:
-          1.25!important;
+          1.25 !important;
 
       }
-
 
 
       .pdf-export-mode footer small,
-      .pdf-export-mode .footer small{
+      .pdf-export-mode .footer small {
 
         font-size:
-          6.5px!important;
+          6.5px !important;
 
         line-height:
-          1.2!important;
+          1.2 !important;
 
       }
-
 
 
       .pdf-export-mode footer h1,
@@ -1252,38 +1262,40 @@ document.addEventListener("DOMContentLoaded", () => {
       .pdf-export-mode .footer h3,
       .pdf-export-mode .footer h4,
       .pdf-export-mode .footer h5,
-      .pdf-export-mode .footer h6{
+      .pdf-export-mode .footer h6 {
 
         margin:
-          0!important;
+          0 !important;
 
       }
 
 
 
       /* ===================================================
-         CEGAH ELEMEN TIDAK TERLIHAT KARENA HEIGHT FIXED
+         RESET GRID
          =================================================== */
 
       .pdf-export-mode .row,
       .pdf-export-mode .col,
-      .pdf-export-mode [class*="col-"]{
+      .pdf-export-mode [class*="col-"] {
 
         min-height:
-          0!important;
+          0 !important;
 
       }
 
 
-
-      .pdf-export-mode img{
+      .pdf-export-mode img {
 
         max-width:
-          100%!important;
+          100% !important;
+
+        height:
+          auto !important;
 
       }
 
-    `;
+  `;
 
 
     clone.prepend(
@@ -1315,15 +1327,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     holder.style.width =
-      "800px";
+      `${pdfRenderWidth}px`;
 
 
     holder.style.height =
       "auto";
 
 
+    holder.style.minHeight =
+      "0";
+
+
     holder.style.background =
-      "#fff";
+      "#ffffff";
 
 
     holder.style.padding =
@@ -1393,7 +1409,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // TUNGGU GAMBAR
+      // TUNGGU SEMUA GAMBAR
       // =====================================================
 
       await Promise.all(
@@ -1434,282 +1450,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // SISTEM AUTO FIT F4
-      //
-      // BERBEDA DENGAN VERSI SEBELUMNYA:
-      //
-      // Sekarang yang menjadi patokan utama adalah:
-      //
-      //     tinggi aktual konten
-      //
-      // dibandingkan dengan:
-      //
-      //     tinggi area F4
-      //
-      // Jadi footer ikut dihitung.
+      // PAKSA LAYOUT UPDATE
       // =====================================================
 
-      let low =
-        400;
-
-
-      let high =
-        1000;
-
-
-      let bestWidth =
-        700;
-
-
-      let bestHeight =
-        Infinity;
-
-
-      let bestScale =
-        1;
-
-
-
-      // =====================================================
-      // FUNGSI UKUR
-      // =====================================================
-
-      async function measureWidth(
-        width
-      ) {
-
-        clone.style.setProperty(
-          "--pdf-render-width",
-          `${width}px`
-        );
-
-
-        holder.style.width =
-          `${width}px`;
-
-
-        await new Promise(
-          resolve => {
-
-            requestAnimationFrame(
-              () => {
-
-                requestAnimationFrame(
-                  resolve
-                );
-
-              }
-            );
-
-          }
-        );
-
-
-        const rect =
-          clone.getBoundingClientRect();
-
-
-        return {
-
-          width:
-            rect.width,
-
-          height:
-            rect.height
-
-        };
-
-      }
-
-
-
-      // =====================================================
-      // CARI WIDTH TERBAIK
-      //
-      // Kita mencari width terbesar yang masih
-      // memungkinkan seluruh konten masuk F4.
-      //
-      // Width lebih besar =
-      // teks lebih besar / wrapping lebih sedikit.
-      //
-      // Width lebih kecil =
-      // konten lebih tinggi.
-      // =====================================================
-
-      for (
-        let i = 0;
-        i < 12;
-        i++
-      ) {
-
-        const mid =
-          (low + high) / 2;
-
-
-        const result =
-          await measureWidth(
-            mid
-          );
-
-
-        if (
-          result.height <=
-          (
-            usableHeight *
-            3.779527559
-          )
-        ) {
-
-          /*
-           * Tinggi CSS pixel yang masih muat
-           * dalam tinggi F4.
-           *
-           * 1 mm ≈ 3.7795 px
-           */
-
-          bestWidth =
-            mid;
-
-          bestHeight =
-            result.height;
-
-
-          low =
-            mid;
-
-        }
-
-        else {
-
-          high =
-            mid;
-
-        }
-
-      }
-
-
-
-      // =====================================================
-      // KANDIDAT PENGAMAN
-      // =====================================================
-
-      const extraCandidates = [
-
-        400,
-        450,
-        500,
-        550,
-        600,
-        650,
-        700,
-        750,
-        800,
-        850,
-        900,
-        950,
-        1000
-
-      ];
-
-
-
-      for (
-        const width of
-        extraCandidates
-      ) {
-
-        const result =
-          await measureWidth(
-            width
-          );
-
-
-        if (
-          result.height <=
-          (
-            usableHeight *
-            3.779527559
-          )
-        ) {
-
-          /*
-           * Ambil width terbesar yang masih
-           * benar-benar muat.
-           */
-
-          if (
-            width >
-            bestWidth
-          ) {
-
-            bestWidth =
-              width;
-
-            bestHeight =
-              result.height;
-
-          }
-
-        }
-
-      }
-
-
-
-      // =====================================================
-      // SET WIDTH FINAL
-      // =====================================================
-
-      clone.style.setProperty(
-        "--pdf-render-width",
-        `${bestWidth}px`
-      );
-
-
-      holder.style.width =
-        `${bestWidth}px`;
-
+      void clone.offsetHeight;
 
 
       await new Promise(
-        resolve => {
-
+        resolve =>
           requestAnimationFrame(
-            () => {
-
-              requestAnimationFrame(
-                resolve
-              );
-
-            }
-
-          );
-
-        }
+            resolve
+          )
       );
 
 
 
       // =====================================================
-      // UKUR ULANG FINAL
+      // HITUNG TINGGI KONTEN SEBENARNYA
+      //
+      // INI PERBAIKAN UTAMA FOOTER
+      //
+      // Sebelumnya:
+      //
+      // height = pdfRenderHeight
+      //
+      // sehingga konten yang melewati batas tersebut
+      // akan dipotong.
+      //
+      // Sekarang kita ambil tinggi asli clone.
       // =====================================================
 
-      const finalRect =
+      const cloneRect =
         clone.getBoundingClientRect();
 
 
-      const finalWidth =
-        finalRect.width;
+      const contentHeight =
+        Math.ceil(
+          Math.max(
+
+            clone.scrollHeight,
+
+            clone.offsetHeight,
+
+            cloneRect.height
+
+          )
+        );
 
 
-      const finalHeight =
-        finalRect.height;
+
+      if (
+        !contentHeight ||
+        contentHeight < 1
+      ) {
+
+        throw new Error(
+          "Tinggi konten PDF tidak dapat dihitung."
+        );
+
+      }
 
 
 
       // =====================================================
       // HTML2CANVAS
+      //
+      // CAPTURE SELURUH KONTEN
+      //
+      // TIDAK LAGI MEMOTONG PADA TINGGI F4.
       // =====================================================
 
       const canvas =
@@ -1717,6 +1525,10 @@ document.addEventListener("DOMContentLoaded", () => {
           clone,
           {
 
+            /*
+             * 2 = cukup tajam untuk PDF
+             * dan masih relatif ringan.
+             */
             scale:
               2,
 
@@ -1732,15 +1544,21 @@ document.addEventListener("DOMContentLoaded", () => {
             logging:
               false,
 
+            width:
+              pdfRenderWidth,
+
+            /*
+             * PENTING:
+             * Gunakan tinggi konten sebenarnya.
+             */
+            height:
+              contentHeight,
+
             windowWidth:
-              Math.ceil(
-                finalWidth
-              ),
+              pdfRenderWidth,
 
             windowHeight:
-              Math.ceil(
-                finalHeight
-              ),
+              contentHeight,
 
             imageTimeout:
               15000,
@@ -1753,6 +1571,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
           }
         );
+
+
+
+      // =====================================================
+      // VALIDASI CANVAS
+      // =====================================================
+
+      if (
+        !canvas ||
+        !canvas.width ||
+        !canvas.height
+      ) {
+
+        throw new Error(
+          "Canvas PDF kosong atau gagal dibuat."
+        );
+
+      }
 
 
 
@@ -1785,95 +1621,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       // =====================================================
-      // HITUNG RASIO CANVAS
+      // HASIL CANVAS
       // =====================================================
 
-      const imageRatio =
-        canvas.height /
-        canvas.width;
-
-
-
-      // =====================================================
-      // FIT KE AREA F4
-      // =====================================================
-
-      let renderWidth =
-        usableWidth;
-
-
-      let renderHeight =
-        renderWidth *
-        imageRatio;
+      const imageData =
+        canvas.toDataURL(
+          "image/jpeg",
+          0.94
+        );
 
 
 
       // =====================================================
-      // JIKA TERLALU TINGGI
-      // FIT KE TINGGI F4
-      // =====================================================
-
-      if (
-        renderHeight >
-        usableHeight
-      ) {
-
-        renderHeight =
-          usableHeight;
-
-
-        renderWidth =
-          renderHeight /
-          imageRatio;
-
-      }
-
-
-
-      // =====================================================
-      // POSISI HORIZONTAL
-      // =====================================================
-
-      const x =
-        marginX +
-        (
-          usableWidth -
-          renderWidth
-        ) / 2;
-
-
-
-      // =====================================================
-      // POSISI VERTIKAL
+      // RENDER FULL AREA F4
       //
-      // SELALU MULAI DARI MARGIN ATAS
-      // =====================================================
-
-      const y =
-        marginTop;
-
-
-
-      // =====================================================
-      // TAMBAHKAN GAMBAR KE PDF
+      // CANVAS SEKARANG BERISI SELURUH KONTEN.
+      //
+      // Kemudian seluruh hasil dimasukkan ke area F4.
+      //
+      // Dengan cara ini:
+      //
+      // 1. Footer tidak terpotong.
+      // 2. Semua testimonial tetap masuk.
+      // 3. Semua experience tetap masuk.
+      // 4. Konten memenuhi area F4.
+      // 5. Tidak ada bagian bawah yang hilang.
       // =====================================================
 
       pdf.addImage(
 
-        canvas.toDataURL(
-          "image/jpeg",
-          0.92
-        ),
+        imageData,
 
         "JPEG",
 
-        x,
+        marginX,
 
-        y,
+        marginTop,
 
-        renderWidth,
+        usableWidth,
 
-        renderHeight,
+        usableHeight,
 
         undefined,
 
@@ -1907,6 +1694,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // =====================================================
       // BERSIHKAN HOLDER
+      //
       // WEBSITE ASLI TETAP UTUH
       // =====================================================
 
